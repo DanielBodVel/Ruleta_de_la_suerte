@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Hombre">Male</string>
+    <string name="app_name">Ruleta de la suerte</string>
+    <string name="mujer">Female</string>
+    <string name="personaliza_personaje">Customize the character</string>
+    <string name="nombre">Name:</string>
+    <string name="introduce_nombre">Enter your name</string>
+    <string name="selecciona_color">Select a color</string>
+    <string name="rojo">Red</string>
+    <string name="azul">Blue</string>
+    <string name="amarillo">Yellow</string>
+    <string name="siguiente">Next</string>
+    <string name="empezar">Start</string>
+    <string name="historial">History</string>
+    <string name="config">Settings</string>
+    <string name="logo">Logo</string>
+    <string name="selec_idi">Selecciona el idioma de la aplicación</string>
+</resources>
