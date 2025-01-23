@@ -16,5 +16,7 @@ class ConfigurationActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //TODO: https://www.youtube.com/watch?v=9lwScTMfGgg
     }
 }
