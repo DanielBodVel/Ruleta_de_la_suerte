@@ -38,13 +38,9 @@ class MainActivity : BaseActivity() {
 //        findViewById<Button>(R.id.historial)?.setOnClickListener{
 //
 //        }
-//
-//        findViewById<Button>(R.id.button3)?.setOnClickListener{
-//
-//        }
-//
+
         findViewById<Button>(R.id.configuracion)?.setOnClickListener {
-            val intent = Intent(this, ConfigurationActivity::class.java)
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
     }
