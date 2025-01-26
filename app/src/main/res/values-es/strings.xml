@@ -15,5 +15,8 @@
     <string name="historial">Historial</string>
     <string name="config">Configuración</string>
     <string name="logo">Logo</string>
-    <string name="selec_idi">Select the application language</string>
+    <string name="selec_idi">Selecciona el idioma de la aplicación</string>
+    <string name="esp">Español</string>
+    <string name="eng">Inglés</string>
+    <string name="volver">Volver</string>
 </resources>

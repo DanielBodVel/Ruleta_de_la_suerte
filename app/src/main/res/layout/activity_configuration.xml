@@ -28,7 +28,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/red"
-        android:text=""
+        android:text="@string/eng"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toEndOf="@+id/buttSpanish"
@@ -41,8 +41,20 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/red"
-        android:text=""
+        android:text="@string/esp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idioma" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:backgroundTint="@color/red"
+        android:id="@+id/buttBack"
+        android:text="@string/volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
