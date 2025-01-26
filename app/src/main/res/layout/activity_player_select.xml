@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".PlayerSelect">
+    tools:context=".PlayerSelectActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:elegantTextHeight="true"
         android:text="@string/personaliza_personaje"
         android:textColor="@color/white"
-        android:elegantTextHeight="true"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,10 +24,12 @@
 
     <ImageView
         android:id="@+id/playerImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_marginTop="16dp"
         android:contentDescription="Imagen presentación con animación y fondo con luz del color selccionado"
+        android:maxWidth="50dp"
+        android:maxHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +88,7 @@
             android:id="@+id/male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
             android:text="@string/Hombre"
             android:textColor="@color/white" />
 

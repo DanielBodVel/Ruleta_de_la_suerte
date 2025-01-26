@@ -19,7 +19,7 @@
             android:name=".TalkActivity"
             android:exported="false" />
         <activity
-            android:name=".PlayerSelect"
+            android:name=".PlayerSelectActivity"
             android:exported="false" />
         <activity
             android:name=".MultiGameActivity"

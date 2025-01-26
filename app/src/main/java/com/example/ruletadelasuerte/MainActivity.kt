@@ -1,12 +1,10 @@
 package com.example.ruletadelasuerte
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import android.view.inputmethod.InputBinding
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -33,7 +31,7 @@ class MainActivity : BaseActivity() {
 
         //TODO: Ver con que lincar los otros botones
         findViewById<Button>(R.id.empezar).setOnClickListener {
-            val intent = Intent(this, PlayerSelect::class.java)
+            val intent = Intent(this, PlayerSelectActivity::class.java)
             startActivity(intent)
         }
 
