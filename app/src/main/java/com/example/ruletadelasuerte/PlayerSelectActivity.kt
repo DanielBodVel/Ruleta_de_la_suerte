@@ -3,6 +3,7 @@ package com.example.ruletadelasuerte
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.widget.Button
@@ -11,6 +12,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,6 +20,29 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 
 class PlayerSelectActivity : AppCompatActivity() {
+    private var contadorJugadores = 1
+
+    private val mapaJugadores: MutableMap<String, Any?> = mutableMapOf(
+        Pair("name1", null),
+        Pair("image1", null),
+        Pair("color1", null),
+        Pair("name2", null),
+        Pair("image2", null),
+        Pair("color2", null),
+        Pair("name3", null),
+        Pair("image3", null),
+        Pair("color3", null)
+    )
+
+    private lateinit var playerName: TextInputEditText
+    private lateinit var playerGenderGroup: RadioGroup
+    private lateinit var playerColorGroup: RadioGroup
+
+    private lateinit var playerImage: ImageView
+    private lateinit var secondImage1: ImageView
+    private lateinit var secondImage2: ImageView
+    private lateinit var secondImage3: ImageView
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,26 +59,20 @@ class PlayerSelectActivity : AppCompatActivity() {
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
 
-        val playerName = findViewById<TextInputEditText>(R.id.nameIn)
-        val playerGenderGroup = findViewById<RadioGroup>(R.id.genderGroup)
-        val playerColorGroup = findViewById<RadioGroup>(R.id.colorGroup)
+        playerName = findViewById(R.id.nameIn)
+        playerGenderGroup = findViewById(R.id.genderGroup)
+        playerColorGroup = findViewById(R.id.colorGroup)
 
-        val playerImage = findViewById<ImageView>(R.id.playerImage)
-        val secondImage1 = findViewById<ImageView>(R.id.imageSecondary1)
-        val secondImage2 = findViewById<ImageView>(R.id.imageSecondary2)
-        val secondImage3 = findViewById<ImageView>(R.id.imageSecondary3)
+        playerImage = findViewById(R.id.playerImage)
+        secondImage1 = findViewById(R.id.imageSecondary1)
+        secondImage2 = findViewById(R.id.imageSecondary2)
+        secondImage3 = findViewById(R.id.imageSecondary3)
 
         val selectedColor = playerColorGroup.checkedRadioButtonId
         var playerColorString: String? = null
 
         playerGenderGroup.setOnCheckedChangeListener { _, _ ->
-            updateImage(
-                playerGenderGroup,
-                playerImage,
-                secondImage1,
-                secondImage2,
-                secondImage3
-            )
+            updateImage()
         }
 
         playerColorGroup.setOnCheckedChangeListener { _, _ ->
@@ -92,29 +111,49 @@ class PlayerSelectActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.next)?.setOnClickListener {
             val playerInputName = playerName.text.toString().trim()
-            if (playerInputName.isEmpty()) {
-                Toast.makeText(this, "No hay ningun nombre", Toast.LENGTH_SHORT).show()
-            }
+            if (playerColorGroup.checkedRadioButtonId != -1 && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
+                if (contadorJugadores <= 3) {
+                    when (contadorJugadores) {
+                        //todo: mirar como pasar la imágen
+                        1 -> {
+                            mapaJugadores["name1"] = playerInputName
+                            mapaJugadores["image1"] = playerImage
+                            mapaJugadores["color1"] = playerColorString
+                        }
 
-            if (playerColorString != null) {
-                val intent = Intent(this, TalkActivity::class.java)
-                //intent.putExtra("PlayerImage", playerImage)
-                intent.putExtra("PlayerColor", playerColorString)
-                intent.putExtra("PlayerName", playerInputName)
-                startActivity(intent)
+                        2 -> {
+                            mapaJugadores["name2"] = playerInputName
+                            mapaJugadores["image2"] = playerImage
+                            mapaJugadores["color2"] = playerColorString
+                        }
+
+                        3 -> {
+                            mapaJugadores["name3"] = playerInputName
+                            mapaJugadores["image3"] = playerImage.drawable.toString()
+                            mapaJugadores["color3"] = playerColorString
+                        }
+
+                        else -> Log.d(
+                            "Error",
+                            "Fallo en agragagación del jugador $contadorJugadores"
+                        )
+                    }
+                    Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
+                    contadorJugadores += 1
+                } else {
+                    // Convertir el mutableMapOf a HashMap (compatible con el Intent)
+                    val hashMapJugadores = HashMap(mapaJugadores)
+                    val intent = Intent(this, TalkActivity::class.java)
+                    intent.putExtra("Players", hashMapJugadores)
+                    startActivity(intent)
+                }
             } else {
                 Toast.makeText(this, "Faltan campos por rellenar", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun updateImage(
-        playerGenderGroup: RadioGroup,
-        playerImage: ImageView,
-        secondImage1: ImageView,
-        secondImage2: ImageView,
-        secondImage3: ImageView
-    ) {
+    private fun updateImage() {
         val selectedGender = playerGenderGroup.checkedRadioButtonId
         when {
             selectedGender == R.id.female -> {
