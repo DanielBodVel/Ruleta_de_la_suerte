@@ -1,5 +1,6 @@
 package com.example.ruletadelasuerte
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -12,7 +13,6 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -111,25 +111,26 @@ class PlayerSelectActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.next)?.setOnClickListener {
             val playerInputName = playerName.text.toString().trim()
+            val platerImage = getImageNameFromResource(this, R.id.playerImage)
+
             if (playerColorGroup.checkedRadioButtonId != -1 && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
                 if (contadorJugadores <= 3) {
                     when (contadorJugadores) {
-                        //todo: mirar como pasar la imágen
                         1 -> {
                             mapaJugadores["name1"] = playerInputName
-                            mapaJugadores["image1"] = playerImage
+                            mapaJugadores["image1"] = platerImage
                             mapaJugadores["color1"] = playerColorString
                         }
 
                         2 -> {
                             mapaJugadores["name2"] = playerInputName
-                            mapaJugadores["image2"] = playerImage
+                            mapaJugadores["image2"] = platerImage
                             mapaJugadores["color2"] = playerColorString
                         }
 
                         3 -> {
                             mapaJugadores["name3"] = playerInputName
-                            mapaJugadores["image3"] = playerImage.drawable.toString()
+                            mapaJugadores["image3"] = platerImage
                             mapaJugadores["color3"] = playerColorString
                         }
 
@@ -170,5 +171,9 @@ class PlayerSelectActivity : AppCompatActivity() {
                 secondImage3.setImageResource(R.drawable.hombre3)
             }
         }
+    }
+
+    private fun getImageNameFromResource(context: Context, resourceId: Int): String {
+        return context.resources.getResourceEntryName(resourceId)
     }
 }

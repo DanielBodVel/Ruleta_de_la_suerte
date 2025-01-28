@@ -8,52 +8,55 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <!--Boton libre, podemos poner para que lleve a la ruleta y gire cada vez q la use el usu-->
-
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="420dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="72dp"
         android:contentDescription="@string/logo"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/historial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="@color/red"
-        android:text="@string/historial"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/history_button"
+        android:contentDescription="@string/config"
+        app:layout_constraintEnd_toStartOf="@+id/configuracion"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/empezar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/empezar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="@color/red"
-        android:text="@string/empezar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
-
-    <Button
+    <ImageButton
         android:id="@+id/configuracion"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/settings_button"
+        android:contentDescription="@string/historial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="@color/red"
-        android:text="@string/config"
+        android:layout_marginTop="136dp"
+        android:text="@string/msgBienvenida"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historial" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintVertical_bias="0.159" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

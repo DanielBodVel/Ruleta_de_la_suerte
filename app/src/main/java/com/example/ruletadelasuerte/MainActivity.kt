@@ -5,9 +5,10 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ruletadelasuerte.base.BaseActivity
@@ -29,17 +30,16 @@ class MainActivity : BaseActivity() {
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
 
-        //TODO: Ver con que lincar los otros botones
-        findViewById<Button>(R.id.empezar).setOnClickListener {
+        findViewById<ConstraintLayout>(R.id.main).setOnClickListener {
             val intent = Intent(this, PlayerSelectActivity::class.java)
             startActivity(intent)
         }
 
-//        findViewById<Button>(R.id.historial)?.setOnClickListener{
-//
-//        }
+        findViewById<ImageButton>(R.id.historial)?.setOnClickListener {
 
-        findViewById<Button>(R.id.configuracion)?.setOnClickListener {
+        }
+
+        findViewById<ImageButton>(R.id.configuracion)?.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }

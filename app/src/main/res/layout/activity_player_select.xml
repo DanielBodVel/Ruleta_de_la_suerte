@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/white"
-            android:text="@string/Hombre"
+            android:text="@string/hombre"
             android:textColor="@color/white" />
 
         <RadioButton
@@ -103,19 +103,21 @@
 
     <LinearLayout
         android:id="@+id/nameGroup"
-        android:layout_width="233dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="260dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genderGroup">
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nombre"
+            android:layout_width="91dp"
+            android:layout_height="43dp"
+            android:text="@string/introduce_nombre"
+            android:textAlignment="center"
             android:textColor="@color/white" />
 
         <com.google.android.material.textfield.TextInputLayout
