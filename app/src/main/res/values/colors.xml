@@ -7,4 +7,7 @@
     <color name="cracedWhite">#dfeaf1</color>
     <color name="lightBlue">#76bfd5</color>
     <color name="red">#da4b54</color>
+    <color name="yellowUser">#ffe800</color>
+    <color name="blueUser">#0099d6</color>
+    <color name="redUser">#e72853</color>
 </resources>

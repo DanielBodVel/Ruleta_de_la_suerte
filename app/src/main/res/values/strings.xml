@@ -50,9 +50,9 @@
     <string name="bote">Bote</string>
     <string name="pierde_turno">Pierde turno</string>
     <string name="quiebra">Quiebra</string>
-    <string name="error_consonante">Introduce solo una consonante</string>
+    <string name="error_consonante">Introduce una consonante</string>
     <string name="error_letra_valida">Introduce solo una letra válida</string>
-    <string name="error_vocal">Introduce solo una vocal</string>
+    <string name="error_vocal">Introduce una vocal</string>
     <string name="error_frase_valida">Introduce una frase válida</string>
     <string name="letra_encontrada">¡La letra %1$s sí está en la frase del panel!</string>
     <string name="letra_aparece">La letra \'%1$s\' aparece %2$d veces en la frase.</string>
