@@ -38,7 +38,7 @@
     <string name="multi_ButtonComprobarLetra">Comprobar</string>
     <string name="multi_IntroduceFrase">Introduce la frase correcta:</string>
     <string name="multi_EditFrase">Escribe aquí la frase</string>
-    <string name="multi_IntroBuy">Puedes comprar una vocal con tu saldo actual. 50€</string>
+    <string name="multi_IntroBuy">Puedes comprar una vocal con tu saldo actual, cada bocal cuesta 50€</string>
     <string name="multi_EditLetra">Introduce la letra que deseas comprar</string>
     <string name="multi_opciones">Elige una opción:</string>
     <string name="multi_ButtonResolver">Resolver</string>

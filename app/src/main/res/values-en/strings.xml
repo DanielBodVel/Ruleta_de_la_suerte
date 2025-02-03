@@ -23,4 +23,19 @@
     <string name="msgGanador">The players have won:</string>
     <string name="winUsu">Picture of the winning user</string>
     <string name="faltanCampos">Missing fields to be filled</string>
+    <string name="talk_intro">Introduction to roulette</string>
+    <string name="talk1">Solve the panel by guessing a hidden phrase or word.</string>
+    <string name="talk2">Spin the wheel to determine how much money you win by matching a consonant.</string>
+    <string name="talk3">Use your accumulated money to buy vowels and facilitate the resolution.</string>
+    <string name="talk4">Avoid negative boxes such as Missed turn or Bankruptcy.</string>
+    <string name="talk5">The player with the most money at the end wins.</string>
+    <string name="multi_gira">Spin the roulette wheel, good luck!</string>
+    <string name="multi_valorAcumulado">Cumulative value:</string>
+    <string name="multi_saldo">Current balance:</string>
+    <string name="multi_valorCasilla">Box value:</string>
+    <string name="multi_LetraEscogida">Enter letters only</string>
+    <string name="multi_ButtonComprobarLetra">Check</string>
+    <string name="multi_IntroduceFrase">Enter the correct sentence:</string>
+    <string name="multi_EditFrase">Write the sentence here</string>
+    <string name="multi_IntroBuy">You can buy a vowel with your current balance, each vowel costs 50€.</string>
 </resources>
