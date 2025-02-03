@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hombre">Hombre</string>
-    <string name="app_name">Ruleta de la suerte</string>
+    <string name="appName">Ruleta de la suerte</string>
     <string name="mujer">Mujer</string>
     <string name="personaliza_personaje">Personaliza tu personaje</string>
-    <string name="introduce_nombre">Introduce tu nombre</string>
-    <string name="selecciona_color">Selecciona un color</string>
+    <string name="nombreIn">Introduce tu nombre</string>
+    <string name="seleccionaColor">Selecciona un color</string>
     <string name="rojo">Rojo</string>
     <string name="azul">Azul</string>
     <string name="amarillo">Amarillo</string>
@@ -19,7 +19,8 @@
     <string name="volver">Volver</string>
     <string name="config">Botón de configuración</string>
     <string name="msgBienvenida">¡Haz click para empezar!</string>
-    <string name="bott_atras">Boton para volver atras</string>
-    <string name="msg_ganador">Los jugadores han ganado:</string>
-    <string name="win_usu">Imágen del usuario ganador</string>
+    <string name="bottAtras">Boton para volver atras</string>
+    <string name="msgGanador">Los jugadores han ganado:</string>
+    <string name="winUsu">Imágen del usuario ganador</string>
+    <string name="faltanCampos">Faltan campos por rellenar</string>
 </resources>

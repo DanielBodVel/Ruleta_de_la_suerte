@@ -1,10 +1,12 @@
 package com.example.ruletadelasuerte
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -14,26 +16,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class EndActivity : AppCompatActivity() {
-    private lateinit var nombre1: String
-    private lateinit var nombre2: String
-    private lateinit var nombre3: String
+    private lateinit var name1: String
+    private lateinit var name2: String
+    private lateinit var name3: String
 
-    private lateinit var avatar1: String
-    private lateinit var avatar2: String
-    private lateinit var avatar3: String
+    private lateinit var image1: String
+    private lateinit var image2: String
+    private lateinit var image3: String
 
-    private var saldo1: Int = 0
-    private var saldo2: Int = 0
-    private var saldo3: Int = 0
-
-    private lateinit var color1: String
-    private lateinit var color2: String
-    private lateinit var color3: String
+    private var balance1: Int = 0
+    private var balance2: Int = 0
+    private var balance3: Int = 0
 
     private lateinit var playerImage: ImageView
     private lateinit var playerName: TextView
-    private lateinit var playerSale: TextView
-    private lateinit var playerColor: TextView
+    private lateinit var playerSale1: TextView
+    private lateinit var playerSale2: TextView
+    private lateinit var playerSale3: TextView
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.R)
@@ -52,50 +51,69 @@ class EndActivity : AppCompatActivity() {
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
 
-        // Recuperar el mapa del Intent
-        val hashMap = intent.getSerializableExtra("miMapa") as? HashMap<*, *>
+        val bundle = intent.extras
+        if (bundle != null) {
+            name1 = bundle.getString("name1").toString()
+            image1 = bundle.getString("image1").toString()
+            balance1 = bundle.getInt("balance1")
 
-        // Convertir de nuevo a mutableMapOf si es necesario
-        val datosIn = hashMap?.toMutableMap()
+            name2 = bundle.getString("name2").toString()
+            image2 = bundle.getString("image2").toString()
+            balance2 = bundle.getInt("balance2")
 
-        nombre1 = datosIn?.get("nombre1") as String
-        avatar1 = datosIn["avatar1"] as String
-        color1 = datosIn["color1"] as String
-        saldo1 = datosIn["sale1"] as Int
+            name3 = bundle.getString("name3").toString()
+            image3 = bundle.getString("image3").toString()
+            balance3 = bundle.getInt("balance3")
+        }
 
-        nombre2 = datosIn["nombre2"] as String
-        avatar2 = datosIn["avatar2"] as String
-        color2 = datosIn["color2"] as String
-        saldo2 = datosIn["sale2"] as Int
+        playerImage = findViewById(R.id.playerImageEnd)
+        playerName = findViewById(R.id.textWinner)
+        playerSale1 = findViewById(R.id.salePlayer1)
+        playerSale2 = findViewById(R.id.salePlayer2)
+        playerSale3 = findViewById(R.id.salePlayer3)
 
-        nombre3 = datosIn["nombre3"] as String
-        avatar3 = datosIn["avatar3"] as String
-        color3 = datosIn["color3"] as String
-        saldo3 = datosIn["sale3"] as Int
-
-        if (saldo1 > saldo2) {
-            if (saldo1 > saldo3) {
+        if (balance1 > balance2) {
+            if (balance1 > balance3) {
                 //Personaje 1
-                playerImage = findViewById(R.id.playerImageEnd)
-                //playerImage.setImageDrawable(R.drawable.avatar1)
+                //val res = datosIn["aavatar1"]
+                val resId = resources.getIdentifier(image1, "drawable", packageName)
+                playerImage.setImageResource(resId)
 
-                playerName = findViewById(R.id.textWinner)
-                playerName.text = "Ha ganado $nombre1"
-
+                playerName.text = "¡Ha ganado $name1 !"
+                playerSale1.text = "El jugador $name1 ha ganado: $balance1€"
+                playerSale2.text = "El jugador $name2 ha ganado: $balance2€"
+                playerSale3.text = "El jugador $name3 ha ganado: $balance3€"
             } else {
                 //Personaje 3
+
+                playerName.text = "¡Ha ganado $name3 !"
+                playerSale1.text = "El jugador $name1 ha ganado: $balance1€"
+                playerSale2.text = "El jugador $name2 ha ganado: $balance2€"
+                playerSale3.text = "El jugador $name3 ha ganado: $balance3€"
             }
         } else {
-            if (saldo2 > saldo3) {
+            if (balance2 > balance3) {
                 //Personaje 2
 
+                playerName.text = "¡Ha ganado $name2!"
+                playerSale1.text = "El jugador $name1 ha ganado: $balance1€"
+                playerSale2.text = "El jugador $name2 ha ganado: $balance2€"
+                playerSale3.text = "El jugador $name3 ha ganado: $balance3€"
             } else {
                 //Personaje 3
 
+                playerName.text = "¡Ha ganado $name3!"
+                playerSale1.text = "El jugador $name1 ha ganado: $balance1€"
+                playerSale2.text = "El jugador $name2 ha ganado: $balance2€"
+                playerSale3.text = "El jugador $name3 ha ganado: $balance3€"
             }
         }
 
         //TODO: código de inserccion a la bbdd
 
+        findViewById<ImageButton>(R.id.imageButtonBack)?.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

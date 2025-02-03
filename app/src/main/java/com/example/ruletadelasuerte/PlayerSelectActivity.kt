@@ -2,6 +2,8 @@ package com.example.ruletadelasuerte
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.hardware.biometrics.BiometricManager.Strings
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
@@ -22,17 +25,7 @@ import com.google.android.material.textfield.TextInputEditText
 class PlayerSelectActivity : AppCompatActivity() {
     private var contadorJugadores = 1
 
-    private val mapaJugadores: MutableMap<String, Any?> = mutableMapOf(
-        Pair("name1", null),
-        Pair("image1", null),
-        Pair("color1", null),
-        Pair("name2", null),
-        Pair("image2", null),
-        Pair("color2", null),
-        Pair("name3", null),
-        Pair("image3", null),
-        Pair("color3", null)
-    )
+    private val bundleJugadores = Bundle()
 
     private lateinit var playerName: TextInputEditText
     private lateinit var playerGenderGroup: RadioGroup
@@ -58,6 +51,8 @@ class PlayerSelectActivity : AppCompatActivity() {
             it.hide(WindowInsets.Type.statusBars())
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
+
+        changeRadioButtonColor()
 
         playerName = findViewById(R.id.nameIn)
         playerGenderGroup = findViewById(R.id.genderGroup)
@@ -111,27 +106,27 @@ class PlayerSelectActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.next)?.setOnClickListener {
             val playerInputName = playerName.text.toString().trim()
-            val platerImage = getImageNameFromResource(this, R.id.playerImage)
+            val playerImage = getImageNameFromResource(this, R.id.playerImage)
 
             if (playerColorGroup.checkedRadioButtonId != -1 && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
                 if (contadorJugadores <= 3) {
                     when (contadorJugadores) {
                         1 -> {
-                            mapaJugadores["name1"] = playerInputName
-                            mapaJugadores["image1"] = platerImage
-                            mapaJugadores["color1"] = playerColorString
+                            bundleJugadores.putString("name1", playerInputName)
+                            bundleJugadores.putString("image1", playerImage)
+                            bundleJugadores.putString("color1", playerColorString)
                         }
 
                         2 -> {
-                            mapaJugadores["name2"] = playerInputName
-                            mapaJugadores["image2"] = platerImage
-                            mapaJugadores["color2"] = playerColorString
+                            bundleJugadores.putString("name2", playerInputName)
+                            bundleJugadores.putString("image2", playerImage)
+                            bundleJugadores.putString("color2", playerColorString)
                         }
 
                         3 -> {
-                            mapaJugadores["name3"] = playerInputName
-                            mapaJugadores["image3"] = platerImage
-                            mapaJugadores["color3"] = playerColorString
+                            bundleJugadores.putString("name3", playerInputName)
+                            bundleJugadores.putString("image3", playerImage)
+                            bundleJugadores.putString("color3", playerColorString)
                         }
 
                         else -> Log.d(
@@ -142,14 +137,32 @@ class PlayerSelectActivity : AppCompatActivity() {
                     Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
                     contadorJugadores += 1
                 } else {
-                    // Convertir el mutableMapOf a HashMap (compatible con el Intent)
-                    val hashMapJugadores = HashMap(mapaJugadores)
                     val intent = Intent(this, TalkActivity::class.java)
-                    intent.putExtra("Players", hashMapJugadores)
+                    intent.putExtra("Players", bundleJugadores)
                     startActivity(intent)
+
+                    /**
+                     * TODO: Recibe esto la sig activity
+                     * val bundle = intent.extras
+                     *         if (bundle != null) {
+                     *             val name1 = bundle.getString("name1")
+                     *             val image1 = bundle.getString("image1")
+                     *             val color1 = bundle.getString("color1")
+                     *
+                     *             val name2 = bundle.getString("name2")
+                     *             val image2 = bundle.getString("image2")
+                     *             val color2 = bundle.getString("color2")
+                     *
+                     *             val name3 = bundle.getString("name3")
+                     *             val image3 = bundle.getString("image3")
+                     *             val color3 = bundle.getString("color3")
+                     *         }
+                     */
+
                 }
             } else {
-                Toast.makeText(this, "Faltan campos por rellenar", Toast.LENGTH_SHORT).show()
+                val error = getString(R.string.faltanCampos)
+                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -175,5 +188,30 @@ class PlayerSelectActivity : AppCompatActivity() {
 
     private fun getImageNameFromResource(context: Context, resourceId: Int): String {
         return context.resources.getResourceEntryName(resourceId)
+    }
+
+    private fun changeRadioButtonColor() {
+        val checkedColor = ContextCompat.getColor(this, R.color.red)
+        val uncheckedColor = ContextCompat.getColor(this, R.color.darkBlue)
+
+        val radioButtonMale = findViewById<RadioButton>(R.id.male)
+        val radioButtonFemale = findViewById<RadioButton>(R.id.female)
+
+        val radioButtonRed = findViewById<RadioButton>(R.id.red)
+        val radioButtonBlue = findViewById<RadioButton>(R.id.blue)
+        val radioButtonYellow = findViewById<RadioButton>(R.id.yellow)
+
+        val colorStateList = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_checked), // Estado seleccionado
+                intArrayOf(-android.R.attr.state_checked) // Estado no seleccionado
+            ),
+            intArrayOf(checkedColor, uncheckedColor) // Color para cada estado
+        )
+        radioButtonMale.buttonTintList = colorStateList
+        radioButtonFemale.buttonTintList = colorStateList
+        radioButtonRed.buttonTintList = colorStateList
+        radioButtonBlue.buttonTintList = colorStateList
+        radioButtonYellow.buttonTintList = colorStateList
     }
 }
