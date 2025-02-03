@@ -32,7 +32,7 @@ class MainActivity : BaseActivity() {
         }
 
         findViewById<ConstraintLayout>(R.id.main).setOnClickListener {
-            val intent = Intent(this, PlayerSelectActivity::class.java)
+            val intent = Intent(this, FinalGameActivity::class.java)
             startActivity(intent)
         }
 
