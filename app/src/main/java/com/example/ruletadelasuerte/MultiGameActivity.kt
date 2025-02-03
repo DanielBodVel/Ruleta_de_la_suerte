@@ -380,9 +380,7 @@ class MultiGameActivity : AppCompatActivity() {
     }
 
     private fun mostrarResultado(sector: Int, sectores: Array<String>) {
-        val resultado = sectores[sector]
-
-        when (resultado) {
+        when (val resultado = sectores[sector]) {
             getString(R.string.pierde_turno) -> {
                 Toast.makeText(
                     this,
@@ -422,11 +420,11 @@ class MultiGameActivity : AppCompatActivity() {
             else -> {
                 val valor = resultado.replace("€", "").toIntOrNull() ?: 0
                 Toast.makeText(this, getString(R.string.resultado_ruleta, resultado), Toast.LENGTH_SHORT).show()
-                valorCeldaTirada.setText("$resultado€")
+                valorCeldaTirada.text = "$resultado€"
                 when (jugadorActivo) {
-                    0 -> valorSaldoJugador.setText(jugador1.text)
-                    1 -> valorSaldoJugador.setText(jugador2.text)
-                    2 -> valorSaldoJugador.setText(jugador3.text)
+                    0 -> valorSaldoJugador.text = jugador1.text
+                    1 -> valorSaldoJugador.text = jugador2.text
+                    2 -> valorSaldoJugador.text = jugador3.text
                 }
                 Handler(Looper.getMainLooper()).postDelayed({ cambiarRuleta_AdivinarLetra(sectores[sector]) }, 2000)
             }
