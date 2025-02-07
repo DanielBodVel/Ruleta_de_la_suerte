@@ -101,58 +101,7 @@ class TalkActivity : AppCompatActivity() {
 
 
     private fun inicializarJugadores(){
-        val bundle = intent.extras
-        if (bundle != null) {
-            name1 = bundle.getString("name1").toString()
-            image1 = bundle.getString("image1").toString()
-            color1 = bundle.getString("color1").toString()
 
-            name2 = bundle.getString("name2").toString()
-            image2 = bundle.getString("image2").toString()
-            color2 = bundle.getString("color2").toString()
-
-            name3 = bundle.getString("name3").toString()
-            image3 = bundle.getString("image3").toString()
-            color3 = bundle.getString("color3").toString()
-        }
-
-        // Mostrar los datos del bundle en un Toast
-        val toastMessage = "Jugador 1: $name1, Imagen: $image1, Color: $color1\n" +
-                "Jugador 2: $name2, Imagen: $image2, Color: $color2\n" +
-                "Jugador 3: $name3, Imagen: $image3, Color: $color3"
-        Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
-
-        // Configuración de la interfaz con los valores recibidos
-        textoFrase = findViewById(R.id.phraseText)
-        barraProgreso = findViewById(R.id.progressBar)
-        imagenGif = findViewById(R.id.gifImage)
-        avatarLayout = findViewById(R.id.avatarsLayout)
-
-        // Setear los avatares y nombres de los jugadores
-        val avatar1 = avatarLayout.getChildAt(0) as LinearLayout
-        val avatar2 = avatarLayout.getChildAt(1) as LinearLayout
-        val avatar3 = avatarLayout.getChildAt(2) as LinearLayout
-
-        // Persona 1
-        val imgAvatar1 = avatar1.getChildAt(0) as ImageView
-        val txtName1 = avatar1.getChildAt(1) as TextView
-        imgAvatar1.setImageResource(resources.getIdentifier(image1, "drawable", packageName))
-        txtName1.text = name1
-        txtName1.setBackgroundColor(Color.parseColor(color1))
-
-        // Persona 2
-        val imgAvatar2 = avatar2.getChildAt(0) as ImageView
-        val txtName2 = avatar2.getChildAt(1) as TextView
-        imgAvatar2.setImageResource(resources.getIdentifier(image2, "drawable", packageName))  // Imagen dinámica
-        txtName2.text = name2
-        txtName2.setBackgroundColor(Color.parseColor(color2))
-
-        // Persona 3
-        val imgAvatar3 = avatar3.getChildAt(0) as ImageView
-        val txtName3 = avatar3.getChildAt(1) as TextView
-        imgAvatar3.setImageResource(resources.getIdentifier(image3, "drawable", packageName))  // Imagen dinámica
-        txtName3.text = name3
-        txtName3.setBackgroundColor(Color.parseColor(color3))
     }
 
     private fun iniciarCambioDeFrases() {
