@@ -24,7 +24,17 @@ import com.google.android.material.textfield.TextInputEditText
 class PlayerSelectActivity : AppCompatActivity() {
     private var contadorJugadores = 1
 
-    private val bundleJugadores = Bundle()
+    private lateinit var jugador1Nombre: String
+    private lateinit var jugador1Color: String
+    private var jugador1Imagen: Int = 0
+
+    private lateinit var jugador2Nombre: String
+    private lateinit var jugador2Color: String
+    private var jugador2Imagen: Int = 0
+
+    private lateinit var jugador3Nombre: String
+    private lateinit var jugador3Color: String
+    private var jugador3Imagen: Int = 0
 
     private lateinit var playerName: TextInputEditText
     private lateinit var playerGenderGroup: RadioGroup
@@ -34,6 +44,9 @@ class PlayerSelectActivity : AppCompatActivity() {
     private lateinit var secondImage1: ImageView
     private lateinit var secondImage2: ImageView
     private lateinit var secondImage3: ImageView
+
+
+    private var imagenSeleccionada: Int = 0
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,87 +75,74 @@ class PlayerSelectActivity : AppCompatActivity() {
         secondImage2 = findViewById(R.id.imageSecondary2)
         secondImage3 = findViewById(R.id.imageSecondary3)
 
-        val selectedColor = playerColorGroup.checkedRadioButtonId
-        var playerColorString: String? = null
+        secondImage1.setOnClickListener {
+            playerImage.setImageDrawable(secondImage1.drawable)
+            imagenSeleccionada = getImageResourceFromDrawable(secondImage1.drawable)
+        }
 
+        secondImage2.setOnClickListener {
+            playerImage.setImageDrawable(secondImage2.drawable)
+            imagenSeleccionada = getImageResourceFromDrawable(secondImage2.drawable)
+        }
+
+        secondImage3.setOnClickListener {
+            playerImage.setImageDrawable(secondImage3.drawable)
+            imagenSeleccionada = getImageResourceFromDrawable(secondImage3.drawable)
+        }
         playerGenderGroup.setOnCheckedChangeListener { _, _ ->
             updateImage()
         }
 
-        playerColorGroup.setOnCheckedChangeListener { _, _ ->
-            when (selectedColor) {
-                R.id.red -> {
-                    val buttonSelected = findViewById<RadioButton>(R.id.red)
-                    playerColorString = buttonSelected.text.toString()
-                }
-
-                R.id.blue -> {
-                    val buttonSelected = findViewById<RadioButton>(R.id.blue)
-                    playerColorString = buttonSelected.text.toString()
-                }
-
-                R.id.yellow -> {
-                    val buttonSelected = findViewById<RadioButton>(R.id.yellow)
-                    playerColorString = buttonSelected.text.toString()
-                }
-            }
-        }
-
-        secondImage1.setOnClickListener {
-            val principalImage = secondImage1.drawable
-            playerImage.setImageDrawable(principalImage)
-        }
-
-        secondImage2.setOnClickListener {
-            val principalImage = secondImage2.drawable
-            playerImage.setImageDrawable(principalImage)
-        }
-
-        secondImage3.setOnClickListener {
-            val principalImage = secondImage3.drawable
-            playerImage.setImageDrawable(principalImage)
-        }
-
         findViewById<Button>(R.id.next)?.setOnClickListener {
             val playerInputName = playerName.text.toString().trim()
-            val playerImage = getImageNameFromResource(this, R.id.playerImage)
+            val playerColor = when (playerColorGroup.checkedRadioButtonId) {
+                R.id.red -> "#e72853"
+                R.id.blue -> "#0099d6"
+                R.id.yellow -> "#ffe800"
+                else -> "#FFFFFF"
+            }
 
-            if (playerColorGroup.checkedRadioButtonId != -1 && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
-                if (contadorJugadores < 3) {
-                    when (contadorJugadores) {
-                        0 -> {
-                            bundleJugadores.putString("name1", playerInputName)
-                            bundleJugadores.putString("image1", playerImage)
-                            bundleJugadores.putString("color1", playerColorString)
-                        }
-
-                        1 -> {
-                            bundleJugadores.putString("name2", playerInputName)
-                            bundleJugadores.putString("image2", playerImage)
-                            bundleJugadores.putString("color2", playerColorString)
-                        }
-
-                        2 -> {
-                            bundleJugadores.putString("name3", playerInputName)
-                            bundleJugadores.putString("image3", playerImage)
-                            bundleJugadores.putString("color3", playerColorString)
-                        }
-
-                        else -> Log.d(
-                            "Error",
-                            "Fallo en agragagación del jugador $contadorJugadores"
-                        )
+            if (playerColor.isNotEmpty() && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
+                when (contadorJugadores) {
+                    1 -> {
+                        jugador1Nombre = playerInputName
+                        jugador1Color = playerColor
+                        jugador1Imagen = R.drawable.hombre1
+                        contadorJugadores++
+                        Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
+                        playerName.text?.clear()
                     }
-                    Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
-                    contadorJugadores += 1
-                } else {
-                    val intent = Intent(this, TalkActivity::class.java)
-                    intent.putExtra("Players", bundleJugadores)
-                    startActivity(intent)
+                    2 -> {
+                        jugador2Nombre = playerInputName
+                        jugador2Color = playerColor
+                        jugador2Imagen = imagenSeleccionada
+                        contadorJugadores++
+                        Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
+                        playerName.text?.clear()
+                    }
+                    3 -> {
+                        jugador3Nombre = playerInputName
+                        jugador3Color = playerColor
+                        jugador3Imagen = imagenSeleccionada
+
+                        val intent = Intent(this, TalkActivity::class.java)
+                        intent.putExtra("jugador1Nombre", jugador1Nombre)
+                        intent.putExtra("jugador1Color", jugador1Color)
+                        intent.putExtra("jugador1Imagen", jugador1Imagen)
+
+                        intent.putExtra("jugador2Nombre", jugador2Nombre)
+                        intent.putExtra("jugador2Color", jugador2Color)
+                        intent.putExtra("jugador2Imagen", jugador2Imagen)
+
+                        intent.putExtra("jugador3Nombre", jugador3Nombre)
+                        intent.putExtra("jugador3Color", jugador3Color)
+                        intent.putExtra("jugador3Imagen", jugador3Imagen)
+
+                        startActivity(intent)
+                    }
                 }
             } else {
-                val error = getString(R.string.faltanCampos)
-                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Faltan campos por completar", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -166,8 +166,16 @@ class PlayerSelectActivity : AppCompatActivity() {
         }
     }
 
-    private fun getImageNameFromResource(context: Context, resourceId: Int): String {
-        return context.resources.getResourceEntryName(resourceId)
+    private fun getImageResourceFromDrawable(drawable: android.graphics.drawable.Drawable): Int {
+        return when (drawable.constantState) {
+            ContextCompat.getDrawable(this, R.drawable.mujer1)?.constantState -> R.drawable.mujer1
+            ContextCompat.getDrawable(this, R.drawable.mujer2)?.constantState -> R.drawable.mujer2
+            ContextCompat.getDrawable(this, R.drawable.mujer3)?.constantState -> R.drawable.mujer3
+            ContextCompat.getDrawable(this, R.drawable.hombre1)?.constantState -> R.drawable.hombre1
+            ContextCompat.getDrawable(this, R.drawable.hombre2)?.constantState -> R.drawable.hombre2
+            ContextCompat.getDrawable(this, R.drawable.hombre3)?.constantState -> R.drawable.hombre3
+            else -> R.drawable.mujer1
+        }
     }
 
     private fun changeRadioButtonColor() {
@@ -184,9 +192,9 @@ class PlayerSelectActivity : AppCompatActivity() {
         val colorStateList = ColorStateList(
             arrayOf(
                 intArrayOf(android.R.attr.state_checked),
-                intArrayOf(-android.R.attr.state_checked) // Estado no seleccionado
+                intArrayOf(-android.R.attr.state_checked)
             ),
-            intArrayOf(checkedColor, uncheckedColor) // Color para cada estado
+            intArrayOf(checkedColor, uncheckedColor)
         )
         radioButtonMale.buttonTintList = colorStateList
         radioButtonFemale.buttonTintList = colorStateList

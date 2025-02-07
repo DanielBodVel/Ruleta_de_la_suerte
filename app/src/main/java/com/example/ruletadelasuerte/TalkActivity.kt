@@ -20,6 +20,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.w3c.dom.Text
 
 class TalkActivity : AppCompatActivity() {
     private lateinit var textoFrase: TextView
@@ -42,19 +43,12 @@ class TalkActivity : AppCompatActivity() {
 
 
     //Valores de los jugadores
-    private lateinit var avatarLayout: LinearLayout
-
-    private lateinit var name1: String
-    private lateinit var image1: String
-    private lateinit var color1: String
-
-    private lateinit var name2: String
-    private lateinit var image2: String
-    private lateinit var color2: String
-
-    private lateinit var name3: String
-    private lateinit var image3: String
-    private lateinit var color3: String
+    private lateinit var imagenJugador1: ImageView
+    private lateinit var textoJugador1: TextView
+    private lateinit var imagenJugador2: ImageView
+    private lateinit var textoJugador2: TextView
+    private lateinit var imagenJugador3: ImageView
+    private lateinit var textoJugador3: TextView
 
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.R)
@@ -68,6 +62,12 @@ class TalkActivity : AppCompatActivity() {
             insets
         }
 
+        textoJugador1 = findViewById(R.id.textoJugador1)
+        imagenJugador1 = findViewById(R.id.imagenJugador1)
+        textoJugador2 = findViewById(R.id.textoJugador2)
+        imagenJugador2 = findViewById(R.id.imagenJugador2)
+        textoJugador3 = findViewById(R.id.textoJugador3)
+        imagenJugador3 = findViewById(R.id.imagenJugador3)
         inicializarJugadores()
 
         frase1 = getString(R.string.talk1)
@@ -94,15 +94,39 @@ class TalkActivity : AppCompatActivity() {
         }
         imagenGif.setImageResource(R.drawable.presentador)
 
+
         iniciarCambioDeFrases()
 
         findViewById<LinearLayout>(R.id.contentLayout).setOnClickListener { actualizarFrase() }
     }
 
 
-    private fun inicializarJugadores(){
+    private fun inicializarJugadores() {
+        val jugador1Nombre = intent.getStringExtra("jugador1Nombre") ?: "Jugador 1"
+        val jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
+        val jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
 
+        val jugador2Nombre = intent.getStringExtra("jugador2Nombre") ?: "Jugador 2"
+        val jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
+        val jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
+
+        val jugador3Nombre = intent.getStringExtra("jugador3Nombre") ?: "Jugador 3"
+        val jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
+        val jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
+
+        textoJugador1.text = jugador1Nombre
+        textoJugador1.setBackgroundColor(Color.parseColor(jugador1Color))
+        imagenJugador1.setImageResource(jugador1Imagen)
+
+        textoJugador2.text = jugador2Nombre
+        textoJugador2.setBackgroundColor(Color.parseColor(jugador2Color))
+        imagenJugador2.setImageResource(jugador2Imagen)
+
+        textoJugador3.text = jugador3Nombre
+        textoJugador3.setBackgroundColor(Color.parseColor(jugador3Color))
+        imagenJugador3.setImageResource(jugador3Imagen)
     }
+
 
     private fun iniciarCambioDeFrases() {
         manejador.postDelayed(object : Runnable {

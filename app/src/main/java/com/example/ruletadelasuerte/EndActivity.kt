@@ -34,6 +34,16 @@ class EndActivity : AppCompatActivity() {
     private lateinit var playerSale2: TextView
     private lateinit var playerSale3: TextView
 
+
+
+
+    //DATOS FAKE PARA BASE DE DATOS
+    private lateinit var nombreJugador1: String
+    private lateinit var ganadorJugador1: String
+
+
+
+
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +120,7 @@ class EndActivity : AppCompatActivity() {
         }
 
         //TODO: código de inserccion a la bbdd
+
 
         findViewById<ImageButton>(R.id.imageButtonBack)?.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
