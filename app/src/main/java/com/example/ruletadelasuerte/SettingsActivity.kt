@@ -46,7 +46,7 @@ class SettingsActivity : BaseActivity() {
             recreate()
         }
 
-        findViewById<Button>(R.id.buttEnglish).setOnClickListener{
+        findViewById<Button>(R.id.buttEnglish).setOnClickListener {
             Toast.makeText(this, "Language changed to english", Toast.LENGTH_SHORT).show()
             val localeManager = LocaleManager(this)
 
@@ -60,7 +60,7 @@ class SettingsActivity : BaseActivity() {
             recreate()
         }
 
-        findViewById<Button>(R.id.buttBack).setOnClickListener{
+        findViewById<Button>(R.id.buttBack).setOnClickListener {
             // Reiniciar la app para aplicar el idioma a todas las actividades
             val intent = Intent(applicationContext, MainActivity::class.java)
             val pendingIntent = PendingIntent.getActivity(

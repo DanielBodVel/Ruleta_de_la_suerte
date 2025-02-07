@@ -229,6 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/red"
             android:paddingHorizontal="32dp"
             android:text="@string/multi_ButtonComprobarLetra"
             app:layout_constraintEnd_toEndOf="parent"
@@ -275,6 +276,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/red"
             android:text="@string/multi_ButtonComprobarLetra" />
     </LinearLayout>
 
@@ -342,6 +344,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:backgroundTint="@color/red"
             android:text="@string/multi_ButtonComprobarLetra" />
     </LinearLayout>
 
@@ -383,6 +386,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
+                android:backgroundTint="@color/red"
                 android:text="@string/multi_ButtonResolver" />
 
             <Button
@@ -390,6 +394,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
+                android:backgroundTint="@color/red"
                 android:text="@string/multi_ButtonComprar" />
 
             <Button
@@ -397,6 +402,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
+                android:backgroundTint="@color/red"
                 android:text="@string/multi_ButtonTirar" />
 
         </LinearLayout>

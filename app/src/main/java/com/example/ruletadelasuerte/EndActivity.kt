@@ -111,7 +111,7 @@ class EndActivity : AppCompatActivity() {
 
         //TODO: código de inserccion a la bbdd
 
-        findViewById<ImageButton>(R.id.imageButtonBack)?.setOnClickListener{
+        findViewById<ImageButton>(R.id.imageButtonBack)?.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

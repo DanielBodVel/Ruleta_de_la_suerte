@@ -36,7 +36,7 @@ class MainActivity : BaseActivity() {
         }
 
         findViewById<ImageButton>(R.id.historial)?.setOnClickListener {
-            val intent = Intent(this, HistorylActivity::class.java)
+            val intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
 

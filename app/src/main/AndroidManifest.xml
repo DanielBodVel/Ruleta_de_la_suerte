@@ -13,7 +13,7 @@
         android:theme="@style/Theme.RuletaDeLaSuerte"
         tools:targetApi="31">
         <activity
-            android:name=".HistorylActivity"
+            android:name=".HistoryActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"

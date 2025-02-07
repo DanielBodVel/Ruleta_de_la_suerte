@@ -98,8 +98,22 @@ class MultiGameActivity : AppCompatActivity() {
         )
 
         sectores2 = arrayOf(
-            "200", getString(R.string.bote), "100", getString(R.string.pierde_turno), "75", "50", "25", getString(R.string.quiebra),
-            "200", "250", "100", getString(R.string.pierde_turno), "75", "50", "25", getString(R.string.quiebra)
+            "200",
+            getString(R.string.bote),
+            "100",
+            getString(R.string.pierde_turno),
+            "75",
+            "50",
+            "25",
+            getString(R.string.quiebra),
+            "200",
+            "250",
+            "100",
+            getString(R.string.pierde_turno),
+            "75",
+            "50",
+            "25",
+            getString(R.string.quiebra)
         )
 
         inicializacionPanel()
@@ -109,6 +123,7 @@ class MultiGameActivity : AppCompatActivity() {
                     inicioAngulo = obtenerAngulo(event.x, event.y)
                     true
                 }
+
                 MotionEvent.ACTION_MOVE -> {
                     val anguloActual = obtenerAngulo(event.x, event.y)
                     val deltaAngulo = anguloActual - inicioAngulo
@@ -116,10 +131,12 @@ class MultiGameActivity : AppCompatActivity() {
                     inicioAngulo = anguloActual
                     true
                 }
+
                 MotionEvent.ACTION_UP -> {
                     girarRuleta()
                     true
                 }
+
                 else -> false
             }
         }
@@ -155,7 +172,7 @@ class MultiGameActivity : AppCompatActivity() {
         textoValorAcumulado = findViewById(R.id.textoValorAcumulado)
     }
 
-    private fun btnOnClicks(){
+    private fun btnOnClicks() {
         botonLetraEscogida.setOnClickListener {
             val letra = letraEscogida.text.toString().trim()
             if (letra.length == 1 && letra.matches(Regex("[a-zA-Z]"))) {
@@ -168,14 +185,15 @@ class MultiGameActivity : AppCompatActivity() {
             } else {
                 letraEscogida.error = getString(R.string.error_letra_valida)
             }
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(letraEscogida.windowToken, 0)
         }
-        btnOpcion1.setOnClickListener{
+        btnOpcion1.setOnClickListener {
             contendorBotones.visibility = View.GONE
             contenedorResolver.visibility = View.VISIBLE
         }
-        btnOpcion2.setOnClickListener{
+        btnOpcion2.setOnClickListener {
             contendorBotones.visibility = View.GONE
             contenedorComprarLetra.visibility = View.VISIBLE
 
@@ -188,11 +206,11 @@ class MultiGameActivity : AppCompatActivity() {
 
             valorSaldoComprar.text = "${saldoJugadorActivo}€"
         }
-        btnOpcion3.setOnClickListener{
+        btnOpcion3.setOnClickListener {
             contendorBotones.visibility = View.GONE
             contendorRuleta.visibility = View.VISIBLE
         }
-        btnComprobarPanel.setOnClickListener{
+        btnComprobarPanel.setOnClickListener {
 
         }
 
@@ -262,7 +280,11 @@ class MultiGameActivity : AppCompatActivity() {
                     tag = if (caracter != ' ') frase.indexOf(caracter, index) else null
                     textSize = 24f
                     gravity = Gravity.CENTER
-                    setBackgroundColor(if (caracter == ' ') getColor(android.R.color.darker_gray) else getColor(android.R.color.white))
+                    setBackgroundColor(
+                        if (caracter == ' ') getColor(android.R.color.darker_gray) else getColor(
+                            android.R.color.white
+                        )
+                    )
                     layoutParams = GridLayout.LayoutParams().apply {
                         width = 0
                         height = GridLayout.LayoutParams.WRAP_CONTENT
@@ -357,8 +379,24 @@ class MultiGameActivity : AppCompatActivity() {
 
     private fun girarRuleta() {
         val sectores = if (frasesResueltas < 2) {
-            arrayOf("200", "100", "250", getString(R.string.pierde_turno), "75", "50", "25", getString(R.string.quiebra),
-                "200", "100", "250", getString(R.string.pierde_turno), "75", "50", "25", getString(R.string.quiebra))
+            arrayOf(
+                "200",
+                "100",
+                "250",
+                getString(R.string.pierde_turno),
+                "75",
+                "50",
+                "25",
+                getString(R.string.quiebra),
+                "200",
+                "100",
+                "250",
+                getString(R.string.pierde_turno),
+                "75",
+                "50",
+                "25",
+                getString(R.string.quiebra)
+            )
         } else {
             sectores2
         }
@@ -389,6 +427,7 @@ class MultiGameActivity : AppCompatActivity() {
                 ).show()
                 siguienteJugador()
             }
+
             getString(R.string.quiebra) -> {
                 saldoAcumulado = 0
                 textoValorAcumulado.text = getString(R.string.valor_acumulado, saldoAcumulado)
@@ -397,10 +436,12 @@ class MultiGameActivity : AppCompatActivity() {
                         saldoJugador1 = 0
                         jugador1.text = "${saldoJugador1}€"
                     }
+
                     1 -> {
                         saldoJugador2 = 0
                         jugador2.text = "${saldoJugador2}€"
                     }
+
                     2 -> {
                         saldoJugador3 = 0
                         jugador3.text = "${saldoJugador3}€"
@@ -413,20 +454,29 @@ class MultiGameActivity : AppCompatActivity() {
                 ).show()
                 siguienteJugador()
             }
+
             getString(R.string.bote) -> {
                 Toast.makeText(this, getString(R.string.bote_mensaje), Toast.LENGTH_SHORT).show()
                 mostrarOpcionesBote()
             }
+
             else -> {
                 val valor = resultado.replace("€", "").toIntOrNull() ?: 0
-                Toast.makeText(this, getString(R.string.resultado_ruleta, resultado), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.resultado_ruleta, resultado),
+                    Toast.LENGTH_SHORT
+                ).show()
                 valorCeldaTirada.text = "$resultado€"
                 when (jugadorActivo) {
                     0 -> valorSaldoJugador.text = jugador1.text
                     1 -> valorSaldoJugador.text = jugador2.text
                     2 -> valorSaldoJugador.text = jugador3.text
                 }
-                Handler(Looper.getMainLooper()).postDelayed({ cambiarRuleta_AdivinarLetra(sectores[sector]) }, 2000)
+                Handler(Looper.getMainLooper()).postDelayed(
+                    { cambiarRuleta_AdivinarLetra(sectores[sector]) },
+                    2000
+                )
             }
         }
     }
@@ -482,12 +532,14 @@ class MultiGameActivity : AppCompatActivity() {
                 1 -> saldoJugador2 -= costoCompraLetra
                 2 -> saldoJugador3 -= costoCompraLetra
             }
-            valorSaldoComprar.text = "${when (jugadorActivo) {
-                0 -> saldoJugador1
-                1 -> saldoJugador2
-                2 -> saldoJugador3
-                else -> 0
-            }}€"
+            valorSaldoComprar.text = "${
+                when (jugadorActivo) {
+                    0 -> saldoJugador1
+                    1 -> saldoJugador2
+                    2 -> saldoJugador3
+                    else -> 0
+                }
+            }€"
 
             if (frase.contains(letra)) {
                 for (i in 0 until panelLetras.childCount) {
@@ -500,9 +552,14 @@ class MultiGameActivity : AppCompatActivity() {
                         }
                     }
                 }
-                Toast.makeText(this, getString(R.string.letra_comprada, letra), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.letra_comprada, letra), Toast.LENGTH_SHORT)
+                    .show()
             } else {
-                Toast.makeText(this, getString(R.string.letra_no_encontrada, letra), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    getString(R.string.letra_no_encontrada, letra),
+                    Toast.LENGTH_SHORT
+                ).show()
                 siguienteJugador()
                 contenedorComprarLetra.visibility = View.GONE
                 contendorRuleta.visibility = View.VISIBLE
@@ -535,9 +592,10 @@ class MultiGameActivity : AppCompatActivity() {
                     textoValorAcumulado.text = getString(R.string.valor_acumulado, saldoAcumulado)
                     actualizarSaldosEnPantalla()
                 }
-            } else if(frasesResueltas == 2){
+            } else if (frasesResueltas == 2) {
                 ruleta.setImageResource(R.drawable.ruletabote)
-                Toast.makeText(this, getString(R.string.frase_correcta_bote), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.frase_correcta_bote), Toast.LENGTH_SHORT)
+                    .show()
                 generarNuevaFrase()
                 llenarPanelLetras(panelLetras, frase)
                 contenedorResolver.visibility = View.GONE
@@ -545,7 +603,7 @@ class MultiGameActivity : AppCompatActivity() {
                 textoValorAcumulado.visibility = View.VISIBLE
                 textoValorAcumulado.text = getString(R.string.valor_acumulado, 0)
 
-            }else{
+            } else {
                 mostrarPanelFinal()
             }
         } else {
