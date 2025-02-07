@@ -202,7 +202,7 @@ class PlayerSelectActivity : AppCompatActivity() {
 
         val colorStateList = ColorStateList(
             arrayOf(
-                intArrayOf(android.R.attr.state_checked), // Estado seleccionado
+                intArrayOf(android.R.attr.state_checked),
                 intArrayOf(-android.R.attr.state_checked) // Estado no seleccionado
             ),
             intArrayOf(checkedColor, uncheckedColor) // Color para cada estado

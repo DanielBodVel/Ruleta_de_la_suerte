@@ -229,7 +229,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/red"
-        android:text="@string/multi_ButtonComprar"
+        android:text="@string/multi_ButtonResolver"
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="gone"

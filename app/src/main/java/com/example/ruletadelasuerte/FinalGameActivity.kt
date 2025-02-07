@@ -1,6 +1,7 @@
 package com.example.ruletadelasuerte
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -10,6 +11,7 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
@@ -45,6 +47,10 @@ class FinalGameActivity : AppCompatActivity() {
     private var fraseActual: String = ""
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var pistasYFrases: Array<Pair<String, String>>
+    private var contadorActivo = true
+    private lateinit var frase: String
+    private lateinit var pista: String
+
 
     @SuppressLint("ClickableViewAccessibility", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +63,16 @@ class FinalGameActivity : AppCompatActivity() {
             insets
         }
         pistasYFrases = arrayOf(
-            Pair(getString(R.string.end_panelFinal), getString(R.string.end_FraseFinal1))
+            Pair(getString(R.string.end_panelFinal1), getString(R.string.end_FraseFinal1)),
+            Pair(getString(R.string.end_panelFinal2), getString(R.string.end_FraseFinal2)),
+            Pair(getString(R.string.end_panelFinal3), getString(R.string.end_FraseFinal3)),
+            Pair(getString(R.string.end_panelFinal4), getString(R.string.end_FraseFinal4)),
+            Pair(getString(R.string.end_panelFinal5), getString(R.string.end_FraseFinal5)),
+            Pair(getString(R.string.end_panelFinal6), getString(R.string.end_FraseFinal6)),
+            Pair(getString(R.string.end_panelFinal7), getString(R.string.end_FraseFinal7)),
+            Pair(getString(R.string.end_panelFinal8), getString(R.string.end_FraseFinal8)),
+            Pair(getString(R.string.end_panelFinal9), getString(R.string.end_FraseFinal9)),
+            Pair(getString(R.string.end_panelFinal10), getString(R.string.end_FraseFinal10))
         )
 
         ruleta = findViewById(R.id.imageView)
@@ -100,6 +115,7 @@ class FinalGameActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
 
         // Añade un listener a los EditText para validar las entradas en tiempo real
         val editTexts =
@@ -149,6 +165,7 @@ class FinalGameActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+            hideKeyboard()
         }
 
         // Configura el listener del botón "Comprobar" para validar la frase introducida
@@ -160,10 +177,13 @@ class FinalGameActivity : AppCompatActivity() {
                     getString(R.string.end_felicidades_acertaste),
                     Toast.LENGTH_SHORT
                 ).show()
+                countDownTimer.cancel()
+                contadorActivo = false
             } else {
                 Toast.makeText(this, getString(R.string.end_frase_incorrecta), Toast.LENGTH_SHORT)
                     .show()
             }
+            hideKeyboard()
         }
     }
 
@@ -177,6 +197,14 @@ class FinalGameActivity : AppCompatActivity() {
     private fun esVocal(letra: String): Boolean {
         val vocales = "AEIOU"
         return letra.uppercase() in vocales
+    }
+
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
     // Valida las entradas de los EditText y habilita/deshabilita el botón "Mostrar"
@@ -226,7 +254,9 @@ class FinalGameActivity : AppCompatActivity() {
     // Muestra el resultado de la ruleta y configura la interfaz para el siguiente paso
     private fun mostrarResultado(sector: Int) {
         val (pista, frase) = pistasYFrases[sector]
-        fraseActual = frase
+        this.pista = pista
+        this.frase = frase
+        this.fraseActual = frase
 
         contenedorRuleta.visibility = View.GONE
         textoPista.visibility = View.VISIBLE
@@ -244,6 +274,7 @@ class FinalGameActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         ).show()
     }
+
 
     // Llena el panel de letras con la frase seleccionada
     private fun llenarPanelLetras(panel: GridLayout, frase: String) {
@@ -275,16 +306,14 @@ class FinalGameActivity : AppCompatActivity() {
             val espaciosDerecha = espaciosTotales - espaciosIzquierda
 
             repeat(espaciosIzquierda) { agregarCuadradoGris(panel) }
-            linea.forEachIndexed { index, caracter ->
+            linea.forEach { caracter ->
                 val vistaLetra = TextView(this).apply {
                     text = if (caracter == ' ') " " else "_"
-                    tag = if (caracter != ' ') frase.indexOf(caracter, index) else null
+                    tag = caracter.toString().uppercase() // Guardar la letra real en el tag
                     textSize = 24f
                     gravity = Gravity.CENTER
                     setBackgroundColor(
-                        if (caracter == ' ') getColor(android.R.color.darker_gray) else getColor(
-                            android.R.color.white
-                        )
+                        if (caracter == ' ') getColor(android.R.color.darker_gray) else getColor(android.R.color.white)
                     )
                     layoutParams = GridLayout.LayoutParams().apply {
                         width = 0
@@ -298,6 +327,9 @@ class FinalGameActivity : AppCompatActivity() {
             repeat(espaciosDerecha) { agregarCuadradoGris(panel) }
         }
     }
+
+
+
 
     // Añade un cuadrado gris al panel de letras
     private fun agregarCuadradoGris(panel: GridLayout) {
@@ -319,40 +351,26 @@ class FinalGameActivity : AppCompatActivity() {
     // Comprueba si una letra está en la frase y la revela en el panel
     private fun comprobarLetra(letra: String) {
         val letraNormalizada = letra.uppercase()
-        var contadorLetras = 0
+        var letraEncontrada = false
 
         for (i in 0 until panelLetras.childCount) {
             val vista = panelLetras.getChildAt(i)
             if (vista is TextView) {
-                val posicionEnFrase = vista.tag as? Int
-                if (posicionEnFrase != null) {
-                    val letraFrase = fraseActual[posicionEnFrase].toString()
-                    if (letraFrase == letraNormalizada && vista.text == "_") {
-                        vista.text = letraFrase
-                        contadorLetras++
-                        Toast.makeText(
-                            this,
-                            getString(R.string.end_letra_si_esta, letraFrase),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                val letraOculta = vista.tag as? String
+                if (letraOculta == letraNormalizada && vista.text == "_") {
+                    vista.text = letraNormalizada
+                    letraEncontrada = true
                 }
             }
         }
-        if (contadorLetras > 0) {
-            Toast.makeText(
-                this,
-                getString(R.string.end_letra_aparece_veces, letraNormalizada, contadorLetras),
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            Toast.makeText(
-                this,
-                getString(R.string.end_letra_no_esta, letraNormalizada),
-                Toast.LENGTH_SHORT
-            ).show()
+
+        if (letraEncontrada) {
+            Toast.makeText(this, "Letra $letraNormalizada encontrada", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
 
     // Muestra el apartado para adivinar la frase completa
     private fun mostrarApartadoAdivinarFrase() {
@@ -372,22 +390,25 @@ class FinalGameActivity : AppCompatActivity() {
     private fun iniciarContador() {
         countDownTimer = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                contador.text = (millisUntilFinished / 1000).toString()
+                if (contadorActivo) {
+                    contador.text = (millisUntilFinished / 1000).toString()
+                }
             }
 
             override fun onFinish() {
-                contador.text = "0"
-                Toast.makeText(
-                    this@FinalGameActivity,
-                    getString(R.string.end_tiempo_agotado),
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (contadorActivo) {
+                    contador.text = "0"
+                    Toast.makeText(
+                        this@FinalGameActivity,
+                        getString(R.string.end_tiempo_agotado),
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                val intent = Intent(this@FinalGameActivity, EndActivity::class.java)
-                startActivity(intent)
+                    val intent = Intent(this@FinalGameActivity, EndActivity::class.java)
+                    startActivity(intent)
 
-                // Finalizar la actividad actual si es necesario
-                finish()
+                    finish()
+                }
             }
         }.start()
 

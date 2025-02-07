@@ -94,8 +94,23 @@ class MultiGameActivity : AppCompatActivity() {
         }
 
         frasesYPistas = arrayOf(
-            Pair(getString(R.string.titular_loco), getString(R.string.frase_titular_loco))
+            Pair(getString(R.string.titular_loco1), getString(R.string.frase_titular_loco1)),
+            Pair(getString(R.string.titular_loco2), getString(R.string.frase_titular_loco2)),
+            Pair(getString(R.string.titular_loco3), getString(R.string.frase_titular_loco3)),
+            Pair(getString(R.string.letra_cancion1), getString(R.string.frase_letra_cancion1)),
+            Pair(getString(R.string.letra_cancion2), getString(R.string.frase_letra_cancion2)),
+            Pair(getString(R.string.letra_cancion3), getString(R.string.frase_letra_cancion3)),
+            Pair(getString(R.string.descubrimiento_cientifico1), getString(R.string.frase_descubrimiento_cientifico1)),
+            Pair(getString(R.string.descubrimiento_cientifico2), getString(R.string.frase_descubrimiento_cientifico2)),
+            Pair(getString(R.string.descubrimiento_cientifico3), getString(R.string.frase_descubrimiento_cientifico3)),
+            Pair(getString(R.string.definicion_concepto1), getString(R.string.frase_definicion_concepto1)),
+            Pair(getString(R.string.definicion_concepto2), getString(R.string.frase_definicion_concepto2)),
+            Pair(getString(R.string.definicion_concepto3), getString(R.string.frase_definicion_concepto3)),
+            Pair(getString(R.string.panel_amor_desamor1), getString(R.string.frase_panel_amor_desamor1)),
+            Pair(getString(R.string.panel_amor_desamor2), getString(R.string.frase_panel_amor_desamor2)),
+            Pair(getString(R.string.panel_amor_desamor3), getString(R.string.frase_panel_amor_desamor3))
         )
+
 
         sectores2 = arrayOf(
             "200",
@@ -172,6 +187,15 @@ class MultiGameActivity : AppCompatActivity() {
         textoValorAcumulado = findViewById(R.id.textoValorAcumulado)
     }
 
+    //Funcion para ocultar el teclado cuando se da a un boton
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
     private fun btnOnClicks() {
         botonLetraEscogida.setOnClickListener {
             val letra = letraEscogida.text.toString().trim()
@@ -188,6 +212,7 @@ class MultiGameActivity : AppCompatActivity() {
             val inputMethodManager =
                 getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(letraEscogida.windowToken, 0)
+            hideKeyboard()
         }
         btnOpcion1.setOnClickListener {
             contendorBotones.visibility = View.GONE
@@ -210,9 +235,6 @@ class MultiGameActivity : AppCompatActivity() {
             contendorBotones.visibility = View.GONE
             contendorRuleta.visibility = View.VISIBLE
         }
-        btnComprobarPanel.setOnClickListener {
-
-        }
 
         btnComprobarLetraComprar.setOnClickListener {
             val letra = entradaLetraComprar.text.toString().trim().uppercase()
@@ -226,15 +248,18 @@ class MultiGameActivity : AppCompatActivity() {
             } else {
                 entradaLetraComprar.error = getString(R.string.error_letra_valida)
             }
+            hideKeyboard()
         }
 
         btnComprobarPanel.setOnClickListener {
             val fraseIntroducida = entradaFrase.text.toString().trim().uppercase()
+            hideKeyboard()
             if (fraseIntroducida.isNotEmpty()) {
                 comprobarFrase(fraseIntroducida)
             } else {
                 entradaFrase.error = getString(R.string.error_frase_valida)
             }
+
         }
     }
 
@@ -605,6 +630,7 @@ class MultiGameActivity : AppCompatActivity() {
 
             } else {
                 mostrarPanelFinal()
+
             }
         } else {
             Toast.makeText(this, getString(R.string.frase_incorrecta), Toast.LENGTH_SHORT).show()
@@ -632,8 +658,11 @@ class MultiGameActivity : AppCompatActivity() {
             .setCancelable(false)
             .show()
 
-        val intent = Intent(this, FinalGameActivity::class.java)
-        startActivity(intent)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, FinalGameActivity::class.java)
+            startActivity(intent)
+        }, 2000)
     }
 
     private fun actualizarSaldosEnPantalla() {
