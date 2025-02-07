@@ -93,6 +93,7 @@ class MultiGameActivity : AppCompatActivity() {
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
 
+
         frasesYPistas = arrayOf(
             Pair(getString(R.string.titular_loco1), getString(R.string.frase_titular_loco1)),
             Pair(getString(R.string.titular_loco2), getString(R.string.frase_titular_loco2)),

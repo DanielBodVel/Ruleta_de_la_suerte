@@ -40,6 +40,7 @@ class TalkActivity : AppCompatActivity() {
 
 
 
+
     //Valores de los jugadores
     private lateinit var avatarLayout: LinearLayout
 

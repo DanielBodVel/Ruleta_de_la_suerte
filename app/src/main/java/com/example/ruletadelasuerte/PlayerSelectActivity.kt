@@ -88,6 +88,9 @@ class PlayerSelectActivity : AppCompatActivity() {
             }
         }
 
+
+
+
         secondImage1.setOnClickListener {
             val principalImage = secondImage1.drawable
             playerImage.setImageDrawable(principalImage)
