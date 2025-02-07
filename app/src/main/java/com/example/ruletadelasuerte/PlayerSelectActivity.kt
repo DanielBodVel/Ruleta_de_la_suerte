@@ -88,9 +88,6 @@ class PlayerSelectActivity : AppCompatActivity() {
             }
         }
 
-
-
-
         secondImage1.setOnClickListener {
             val principalImage = secondImage1.drawable
             playerImage.setImageDrawable(principalImage)
@@ -111,21 +108,21 @@ class PlayerSelectActivity : AppCompatActivity() {
             val playerImage = getImageNameFromResource(this, R.id.playerImage)
 
             if (playerColorGroup.checkedRadioButtonId != -1 && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
-                if (contadorJugadores <= 3) {
+                if (contadorJugadores < 3) {
                     when (contadorJugadores) {
-                        1 -> {
+                        0 -> {
                             bundleJugadores.putString("name1", playerInputName)
                             bundleJugadores.putString("image1", playerImage)
                             bundleJugadores.putString("color1", playerColorString)
                         }
 
-                        2 -> {
+                        1 -> {
                             bundleJugadores.putString("name2", playerInputName)
                             bundleJugadores.putString("image2", playerImage)
                             bundleJugadores.putString("color2", playerColorString)
                         }
 
-                        3 -> {
+                        2 -> {
                             bundleJugadores.putString("name3", playerInputName)
                             bundleJugadores.putString("image3", playerImage)
                             bundleJugadores.putString("color3", playerColorString)
@@ -142,25 +139,6 @@ class PlayerSelectActivity : AppCompatActivity() {
                     val intent = Intent(this, TalkActivity::class.java)
                     intent.putExtra("Players", bundleJugadores)
                     startActivity(intent)
-
-                    /**
-                     * TODO: Recibe esto la sig activity
-                     * val bundle = intent.extras
-                     *         if (bundle != null) {
-                     *             val name1 = bundle.getString("name1")
-                     *             val image1 = bundle.getString("image1")
-                     *             val color1 = bundle.getString("color1")
-                     *
-                     *             val name2 = bundle.getString("name2")
-                     *             val image2 = bundle.getString("image2")
-                     *             val color2 = bundle.getString("color2")
-                     *
-                     *             val name3 = bundle.getString("name3")
-                     *             val image3 = bundle.getString("image3")
-                     *             val color3 = bundle.getString("color3")
-                     *         }
-                     */
-
                 }
             } else {
                 val error = getString(R.string.faltanCampos)
