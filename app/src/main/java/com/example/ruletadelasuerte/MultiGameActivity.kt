@@ -3,6 +3,7 @@ package com.example.ruletadelasuerte
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -63,10 +64,6 @@ class MultiGameActivity : AppCompatActivity() {
     private var jugadorActivo = 0
     private lateinit var frase: String
 
-    private var saldoJugador1 = 0
-    private var saldoJugador2 = 0
-    private var saldoJugador3 = 0
-
     private var inicioAngulo = 0f
     private var rotacionFinal = 0f
     private lateinit var frasesYPistas: Array<Pair<String, String>>
@@ -75,6 +72,24 @@ class MultiGameActivity : AppCompatActivity() {
 
     private var frasesResueltas = 0
     private val costoCompraLetra = 50
+
+
+    //Datos de los jugadores
+    private var saldoJugador1 = 0
+    private lateinit var avatarJugador1: ImageView
+    private lateinit var nombreJugador1:TextView
+    private lateinit var linearJugador1: LinearLayout
+
+    private var saldoJugador2 = 0
+    private lateinit var avatarJugador2: ImageView
+    private lateinit var nombreJugador2:TextView
+    private lateinit var linearJugador2: LinearLayout
+
+    private var saldoJugador3 = 0
+    private lateinit var avatarJugador3: ImageView
+    private lateinit var nombreJugador3:TextView
+    private lateinit var linearJugador3: LinearLayout
+
 
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("ClickableViewAccessibility")
@@ -88,6 +103,7 @@ class MultiGameActivity : AppCompatActivity() {
             insets
         }
         inicializacionVaribles()
+        inicializarJugadores()
         window.insetsController?.let {
             it.hide(WindowInsets.Type.statusBars())
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -164,9 +180,9 @@ class MultiGameActivity : AppCompatActivity() {
     private fun inicializacionVaribles() {
         textoPista = findViewById(R.id.textoPista)
         panelLetras = findViewById(R.id.panelLetras)
-        jugador1 = findViewById(R.id.textoJugador1)
-        jugador2 = findViewById(R.id.textoJugador2)
-        jugador3 = findViewById(R.id.textoJugador3)
+        jugador1 = findViewById(R.id.saldoJugador1)
+        jugador2 = findViewById(R.id.saldoJugador2)
+        jugador3 = findViewById(R.id.saldoJugador3)
         ruleta = findViewById(R.id.imageView)
         contendorRuleta = findViewById(R.id.contenedorRuleta)
         contenedorAdivinarLetra = findViewById(R.id.contenedorAdivinarLetra)
@@ -186,6 +202,41 @@ class MultiGameActivity : AppCompatActivity() {
         entradaLetraComprar = findViewById(R.id.entradaLetraComprar)
         valorSaldoComprar = findViewById(R.id.valorSaldoComprar)
         textoValorAcumulado = findViewById(R.id.textoValorAcumulado)
+        nombreJugador1 = findViewById(R.id.nombreJugador1)
+        avatarJugador1 = findViewById(R.id.avatarJugador1)
+        nombreJugador2 = findViewById(R.id.nombreJugador2)
+        avatarJugador2 = findViewById(R.id.avatarJugador2)
+        nombreJugador3 = findViewById(R.id.nombreJugador3)
+        avatarJugador3 = findViewById(R.id.avatarJugador3)
+        linearJugador1 = findViewById(R.id.linearJugador1)
+        linearJugador2 = findViewById(R.id.linearJugador2)
+        linearJugador3 = findViewById(R.id.linearJugador3)
+    }
+
+    private fun inicializarJugadores() {
+        val jugador1Nombre = intent.getStringExtra("jugador1Nombre") ?: "Jugador 1"
+        val jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
+        val jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
+
+        val jugador2Nombre = intent.getStringExtra("jugador2Nombre") ?: "Jugador 2"
+        val jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
+        val jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
+
+        val jugador3Nombre = intent.getStringExtra("jugador3Nombre") ?: "Jugador 3"
+        val jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
+        val jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
+
+        nombreJugador1.text = jugador1Nombre
+        nombreJugador1.setBackgroundColor(Color.parseColor(jugador1Color))
+        avatarJugador1.setImageResource(jugador1Imagen)
+
+        nombreJugador2.text = jugador2Nombre
+        nombreJugador2.setBackgroundColor(Color.parseColor(jugador2Color))
+        avatarJugador2.setImageResource(jugador2Imagen)
+
+        nombreJugador3.text = jugador3Nombre
+        nombreJugador3.setBackgroundColor(Color.parseColor(jugador3Color))
+        avatarJugador3.setImageResource(jugador3Imagen)
     }
 
     //Funcion para ocultar el teclado cuando se da a un boton
@@ -527,14 +578,11 @@ class MultiGameActivity : AppCompatActivity() {
     }
 
     private fun actualizarJugadorActivo() {
-        jugador1.setBackgroundColor(resources.getColor(android.R.color.holo_blue_light))
-        jugador2.setBackgroundColor(resources.getColor(android.R.color.holo_green_light))
-        jugador3.setBackgroundColor(resources.getColor(android.R.color.holo_red_light))
 
         when (jugadorActivo) {
-            0 -> jugador1.setBackgroundResource(R.drawable.borde)
-            1 -> jugador2.setBackgroundResource(R.drawable.borde)
-            2 -> jugador3.setBackgroundResource(R.drawable.borde)
+            0 -> linearJugador1.setBackgroundResource(R.drawable.borde)
+            1 -> linearJugador2.setBackgroundResource(R.drawable.borde)
+            2 -> linearJugador3.setBackgroundResource(R.drawable.borde)
         }
     }
 

@@ -94,9 +94,9 @@ class PlayerSelectActivity : AppCompatActivity() {
         findViewById<Button>(R.id.next)?.setOnClickListener {
             val playerInputName = playerName.text.toString().trim()
             val playerColor = when (playerColorGroup.checkedRadioButtonId) {
-                R.id.red -> R.color.redUser
-                R.id.blue -> R.color.blueUser
-                R.id.yellow -> R.color.yellowUser
+                R.id.red -> "#e72853"
+                R.id.blue -> "#0099d6"
+                R.id.yellow -> "#ffe800"
                 else -> "#FFFFFF"
             }
 

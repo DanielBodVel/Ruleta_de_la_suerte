@@ -50,6 +50,18 @@ class TalkActivity : AppCompatActivity() {
     private lateinit var imagenJugador3: ImageView
     private lateinit var textoJugador3: TextView
 
+    private lateinit var jugador1Nombre: String
+    private lateinit var jugador1Color: String
+    private var jugador1Imagen: Int = 0
+
+    private lateinit var jugador2Nombre: String
+    private lateinit var jugador2Color: String
+    private var jugador2Imagen: Int = 0
+
+    private lateinit var jugador3Nombre: String
+    private lateinit var jugador3Color: String
+    private var jugador3Imagen: Int = 0
+
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,32 +99,47 @@ class TalkActivity : AppCompatActivity() {
         textoFrase = findViewById(R.id.phraseText)
         barraProgreso = findViewById(R.id.progressBar)
         imagenGif = findViewById(R.id.gifImage)
-        startButton = findViewById(R.id.startButton)
-        startButton.setOnClickListener {
-            val intent = Intent(this, MultiGameActivity::class.java)
-            startActivity(intent)
-        }
+
         imagenGif.setImageResource(R.drawable.presentador)
 
 
         iniciarCambioDeFrases()
-
+        startButton = findViewById(R.id.startButton)
         findViewById<LinearLayout>(R.id.contentLayout).setOnClickListener { actualizarFrase() }
+
+
+
+        startButton.setOnClickListener {
+            val newIntent = Intent(this, MultiGameActivity::class.java)
+            newIntent.putExtra("jugador1Nombre", textoJugador1.text.toString())
+            newIntent.putExtra("jugador1Color", jugador1Color)
+            newIntent.putExtra("jugador1Imagen", jugador1Imagen)
+
+            newIntent.putExtra("jugador2Nombre", textoJugador2.text.toString())
+            newIntent.putExtra("jugador2Color", jugador2Color)
+            newIntent.putExtra("jugador2Imagen", jugador2Imagen)
+
+            newIntent.putExtra("jugador3Nombre", textoJugador3.text.toString())
+            newIntent.putExtra("jugador3Color", jugador3Color)
+            newIntent.putExtra("jugador3Imagen", jugador3Imagen)
+
+            startActivity(newIntent)
+        }
     }
 
 
     private fun inicializarJugadores() {
-        val jugador1Nombre = intent.getStringExtra("jugador1Nombre") ?: "Jugador 1"
-        val jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
-        val jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
+        jugador1Nombre = intent.getStringExtra("jugador1Nombre") ?: "Jugador 1"
+        jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
+        jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
 
-        val jugador2Nombre = intent.getStringExtra("jugador2Nombre") ?: "Jugador 2"
-        val jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
-        val jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
+        jugador2Nombre = intent.getStringExtra("jugador2Nombre") ?: "Jugador 2"
+        jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
+        jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
 
-        val jugador3Nombre = intent.getStringExtra("jugador3Nombre") ?: "Jugador 3"
-        val jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
-        val jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
+        jugador3Nombre = intent.getStringExtra("jugador3Nombre") ?: "Jugador 3"
+        jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
+        jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
 
         textoJugador1.text = jugador1Nombre
         textoJugador1.setBackgroundColor(Color.parseColor(jugador1Color))
