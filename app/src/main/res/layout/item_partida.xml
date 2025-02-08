@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/nombreJugador1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/gananciaJugador1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/nombreJugador1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/ganador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/ganador"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/gananciaJugador1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/nombreJugadorganador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/gananciaJugador2"
+        app:layout_constraintTop_toBottomOf="@+id/ganador"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bright_crown" />
+
+    <TextView
+        android:id="@+id/nombreJugador2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreJugador1"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/gananciaJugador2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/nombreJugador2"
+        app:layout_constraintTop_toBottomOf="@+id/gananciaJugador1"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/nombreJugador3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreJugador2"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/gananciaJugador3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/nombreJugador3"
+        app:layout_constraintTop_toBottomOf="@+id/gananciaJugador2"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/gananciaJugador3"
+        app:layout_constraintTop_toBottomOf="@+id/nombreJugadorganador"
+        tools:text="TextView"
+        tools:textColor="@color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -145,4 +145,5 @@
     <string name="end_letra_no_esta">The letter \'%s\' is not in the sentence.</string>
     <string name="end_tiempo_agotado">Time out!</string>
     <string name="talk_Empezar">Start</string>
+    <string name="ganador">Winner:</string>
 </resources>
