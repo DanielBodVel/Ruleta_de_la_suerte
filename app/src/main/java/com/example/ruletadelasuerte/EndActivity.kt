@@ -9,11 +9,14 @@ import android.view.WindowInsetsController
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.ruletadelasuerte.utils.GameSaver
+import java.sql.Date
 
 class EndActivity : AppCompatActivity() {
     private lateinit var name1: String
@@ -35,13 +38,15 @@ class EndActivity : AppCompatActivity() {
     private lateinit var playerSale3: TextView
 
 
-
-
     //DATOS FAKE PARA BASE DE DATOS
-    private lateinit var nombreJugador1: String
-    private lateinit var ganadorJugador1: String
+    private var nombreJugador1: String = "Daniel"
+    private var nombreJugador2: String = "Abel"
+    private var nombreJugador3: String = "David"
+    private var ganancia1: Int = 5000
+    private var ganancia2: Int = 200
+    private var ganancia3: Int = 800
 
-
+    private val GameSaver = GameSaver(this)
 
 
     @SuppressLint("SetTextI18n")
@@ -119,10 +124,11 @@ class EndActivity : AppCompatActivity() {
             }
         }
 
-        //TODO: código de inserccion a la bbdd
-
-
         findViewById<ImageButton>(R.id.imageButtonBack)?.setOnClickListener {
+            val id = GameSaver.insertGame(nombreJugador1, ganancia1, nombreJugador2, ganancia2, nombreJugador3, ganancia3)
+            if (id != -1L) {
+                Toast.makeText(this, "Partida guardada correctamente", Toast.LENGTH_SHORT).show()
+            }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

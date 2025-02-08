@@ -1,11 +1,9 @@
 package com.example.ruletadelasuerte
 
-import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.widget.Button
@@ -96,33 +94,35 @@ class PlayerSelectActivity : AppCompatActivity() {
         findViewById<Button>(R.id.next)?.setOnClickListener {
             val playerInputName = playerName.text.toString().trim()
             val playerColor = when (playerColorGroup.checkedRadioButtonId) {
-                R.id.red -> "#e72853"
-                R.id.blue -> "#0099d6"
-                R.id.yellow -> "#ffe800"
+                R.id.red -> R.color.redUser
+                R.id.blue -> R.color.blueUser
+                R.id.yellow -> R.color.yellowUser
                 else -> "#FFFFFF"
             }
 
-            if (playerColor.isNotEmpty() && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
+            if (playerColorGroup.checkedRadioButtonId != -1 && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
                 when (contadorJugadores) {
                     1 -> {
                         jugador1Nombre = playerInputName
-                        jugador1Color = playerColor
+                        jugador1Color = playerColor.toString()
                         jugador1Imagen = R.drawable.hombre1
                         contadorJugadores++
                         Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
                         playerName.text?.clear()
                     }
+
                     2 -> {
                         jugador2Nombre = playerInputName
-                        jugador2Color = playerColor
+                        jugador2Color = playerColor.toString()
                         jugador2Imagen = imagenSeleccionada
                         contadorJugadores++
                         Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
                         playerName.text?.clear()
                     }
+
                     3 -> {
                         jugador3Nombre = playerInputName
-                        jugador3Color = playerColor
+                        jugador3Color = playerColor.toString()
                         jugador3Imagen = imagenSeleccionada
 
                         val intent = Intent(this, TalkActivity::class.java)
