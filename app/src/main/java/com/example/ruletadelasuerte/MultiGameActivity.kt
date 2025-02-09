@@ -518,6 +518,8 @@ class MultiGameActivity : AppCompatActivity() {
             contenedorAdivinarLetra.visibility = View.GONE
             contendorRuleta.visibility = View.VISIBLE
         }
+
+        hideKeyboard()
     }
 
     private fun obtenerAngulo(x: Float, y: Float): Float {
@@ -685,6 +687,9 @@ class MultiGameActivity : AppCompatActivity() {
                 1 -> saldoJugador2 -= costoCompraLetra
                 2 -> saldoJugador3 -= costoCompraLetra
             }
+            jugador1.text = "${saldoJugador1}€"
+            jugador2.text = "${saldoJugador2}€"
+            jugador3.text = "${saldoJugador3}€"
             valorSaldoComprar.text = "${
                 when (jugadorActivo) {
                     0 -> saldoJugador1
