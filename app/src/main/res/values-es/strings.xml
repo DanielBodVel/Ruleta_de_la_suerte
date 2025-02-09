@@ -55,7 +55,7 @@
     <string name="frase_descubrimiento_cientifico3">HALLAN UN FOSIL DE UN SER DESCONOCIDO</string>
     <string name="frase_definicion_concepto1">LA NOSTALGIA ES EL ECO DEL TIEMPO</string>
     <string name="frase_definicion_concepto2">UN FRACTAL SE REPITE EN INFINITAS ESCALAS</string>
-    <string name="frase_definicion_concepto3">EL AMOR DESAFIA TODAS LAS LEYES FÍSICAS</string>
+    <string name="frase_definicion_concepto3">EL AMOR DESAFIA TODAS LAS LEYES FISICAS</string>
     <string name="frase_panel_amor_desamor1">TE AME COMO UN LOCO PERO DESPERTE A TIEMPO</string>
     <string name="frase_panel_amor_desamor2">TUS OJOS SON UN MAPA Y ME PIERDO</string>
     <string name="frase_panel_amor_desamor3">PROMETIMOS UN SIEMPRE QUE DURO SOLO UN SUSPIRO</string>
@@ -102,8 +102,8 @@
     <string name="end_FraseFinal1">RAPIDO VELOZ Y AGIL</string>
     <string name="end_FraseFinal2">HERMOSO, BELLO Y RADIANTE</string>
     <string name="end_FraseFinal3">FUERTE, ROBUSTO Y PODEROSO</string>
-    <string name="end_FraseFinal4">1984 DE GEORGE ORWELL</string>
-    <string name="end_FraseFinal5">CIEN AÑOS DE SOLEDAD DE GABRIEL GARCÍA MÁRQUEZ</string>
+    <string name="end_FraseFinal4">MOBY DICK DE HERMAN MELVILLE</string>
+    <string name="end_FraseFinal5">CIEN AÑOS DE SOLEDAD DE GABRIEL GARCIA MARQUEZ</string>
     <string name="end_FraseFinal6">DON QUIJOTE DE LA MANCHA DE MIGUEL DE CERVANTES</string>
     <string name="end_FraseFinal7">EL PADRINO DE FRANCIS FORD COPPOLA</string>
     <string name="end_FraseFinal8">TITANIC DE JAMES CAMERON</string>

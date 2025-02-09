@@ -39,11 +39,6 @@ class EndActivity : AppCompatActivity() {
     private lateinit var jugador3Color: String
     private var jugador3Imagen: Int = 0
 
-//    private lateinit var salePlayer1: TextView
-//    private lateinit var salePlayer2: TextView
-//    private lateinit var salePlayer3: TextView
-
-
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {

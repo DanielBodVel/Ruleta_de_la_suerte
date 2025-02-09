@@ -719,6 +719,7 @@ class MultiGameActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
                 siguienteJugador()
+                contendorBotones.visibility = View.GONE
                 contenedorComprarLetra.visibility = View.GONE
                 contendorRuleta.visibility = View.VISIBLE
             }
@@ -772,7 +773,6 @@ class MultiGameActivity : AppCompatActivity() {
 
             } else {
                 mostrarPanelFinal()
-
             }
         } else {
             Toast.makeText(this, getString(R.string.frase_incorrecta), Toast.LENGTH_SHORT).show()

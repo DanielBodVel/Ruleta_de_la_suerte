@@ -60,19 +60,19 @@ class MainActivity : BaseActivity() {
 
         // Al hacer clic en la pantalla, se abre la actividad de selección de jugadores
         findViewById<ConstraintLayout>(R.id.main).setOnClickListener {
-            val intent = Intent(this, PlayerSelectActivity::class.java)
+            val intent = Intent(this@MainActivity, PlayerSelectActivity::class.java)
             startActivity(intent)
         }
 
         // Botón para ir al historial de partidas
         findViewById<ImageButton>(R.id.historial)?.setOnClickListener {
-            val intent = Intent(this, HistoryActivity::class.java)
+            val intent = Intent(this@MainActivity, HistoryActivity::class.java)
             startActivity(intent)
         }
 
         // Botón para acceder a la configuración
         findViewById<ImageButton>(R.id.configuracion)?.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
+            val intent = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(intent)
         }
     }
