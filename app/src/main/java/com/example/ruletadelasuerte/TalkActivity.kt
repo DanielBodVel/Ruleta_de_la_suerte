@@ -14,13 +14,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import org.w3c.dom.Text
 
 class TalkActivity : AppCompatActivity() {
     private lateinit var textoFrase: TextView
@@ -38,9 +36,6 @@ class TalkActivity : AppCompatActivity() {
     private var progreso = 0
     private val manejador = Handler(Looper.getMainLooper())
     private lateinit var startButton: Button
-
-
-
 
     //Valores de los jugadores
     private lateinit var imagenJugador1: ImageView

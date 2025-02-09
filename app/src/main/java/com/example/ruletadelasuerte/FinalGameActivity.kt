@@ -103,16 +103,16 @@ class FinalGameActivity : AppCompatActivity() {
         animator.start()
 
         pistasYFrases = arrayOf(
-            Pair(getString(R.string.end_panelFinal1), getString(R.string.end_FraseFinal1)),
-            Pair(getString(R.string.end_panelFinal2), getString(R.string.end_FraseFinal2)),
-            Pair(getString(R.string.end_panelFinal3), getString(R.string.end_FraseFinal3)),
-            Pair(getString(R.string.end_panelFinal4), getString(R.string.end_FraseFinal4)),
-            Pair(getString(R.string.end_panelFinal5), getString(R.string.end_FraseFinal5)),
-            Pair(getString(R.string.end_panelFinal6), getString(R.string.end_FraseFinal6)),
-            Pair(getString(R.string.end_panelFinal7), getString(R.string.end_FraseFinal7)),
-            Pair(getString(R.string.end_panelFinal8), getString(R.string.end_FraseFinal8)),
-            Pair(getString(R.string.end_panelFinal9), getString(R.string.end_FraseFinal9)),
-            Pair(getString(R.string.end_panelFinal10), getString(R.string.end_FraseFinal10))
+            Pair(getString(R.string.end_panelFinal_sinonimos), getString(R.string.end_FraseFinal1)),
+            Pair(getString(R.string.end_panelFinal_sinonimos), getString(R.string.end_FraseFinal2)),
+            Pair(getString(R.string.end_panelFinal_sinonimos), getString(R.string.end_FraseFinal3)),
+            Pair(getString(R.string.end_panelFinal_libroAutor), getString(R.string.end_FraseFinal4)),
+            Pair(getString(R.string.end_panelFinal_libroAutor), getString(R.string.end_FraseFinal5)),
+            Pair(getString(R.string.end_panelFinal_libroAutor), getString(R.string.end_FraseFinal6)),
+            Pair(getString(R.string.end_panelFinal_peliculaDirector), getString(R.string.end_FraseFinal7)),
+            Pair(getString(R.string.end_panelFinal_peliculaDirector), getString(R.string.end_FraseFinal8)),
+            Pair(getString(R.string.end_panelFinal_peliculaDirector), getString(R.string.end_FraseFinal9)),
+            Pair(getString(R.string.end_panelFinal_peliculaDirector), getString(R.string.end_FraseFinal10))
         )
 
         ruleta = findViewById(R.id.imageView)

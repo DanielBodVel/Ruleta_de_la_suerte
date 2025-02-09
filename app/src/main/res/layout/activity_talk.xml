@@ -48,7 +48,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Bienvenido al juego de la ruleta"
+            android:text="@string/talk0"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </LinearLayout>

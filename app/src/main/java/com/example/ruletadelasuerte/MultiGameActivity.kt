@@ -132,46 +132,46 @@ class MultiGameActivity : AppCompatActivity() {
         animator.start()
 
         frasesYPistas = arrayOf(
-            Pair(getString(R.string.titular_loco1), getString(R.string.frase_titular_loco1)),
-            Pair(getString(R.string.titular_loco2), getString(R.string.frase_titular_loco2)),
-            Pair(getString(R.string.titular_loco3), getString(R.string.frase_titular_loco3)),
-            Pair(getString(R.string.letra_cancion1), getString(R.string.frase_letra_cancion1)),
-            Pair(getString(R.string.letra_cancion2), getString(R.string.frase_letra_cancion2)),
-            Pair(getString(R.string.letra_cancion3), getString(R.string.frase_letra_cancion3)),
+            Pair(getString(R.string.titular_loco), getString(R.string.frase_titular_loco1)),
+            Pair(getString(R.string.titular_loco), getString(R.string.frase_titular_loco2)),
+            Pair(getString(R.string.titular_loco), getString(R.string.frase_titular_loco3)),
+            Pair(getString(R.string.letra_cancion), getString(R.string.frase_letra_cancion1)),
+            Pair(getString(R.string.letra_cancion), getString(R.string.frase_letra_cancion2)),
+            Pair(getString(R.string.letra_cancion), getString(R.string.frase_letra_cancion3)),
             Pair(
-                getString(R.string.descubrimiento_cientifico1),
+                getString(R.string.descubrimiento_cientifico),
                 getString(R.string.frase_descubrimiento_cientifico1)
             ),
             Pair(
-                getString(R.string.descubrimiento_cientifico2),
+                getString(R.string.descubrimiento_cientifico),
                 getString(R.string.frase_descubrimiento_cientifico2)
             ),
             Pair(
-                getString(R.string.descubrimiento_cientifico3),
+                getString(R.string.descubrimiento_cientifico),
                 getString(R.string.frase_descubrimiento_cientifico3)
             ),
             Pair(
-                getString(R.string.definicion_concepto1),
+                getString(R.string.definicion_concepto),
                 getString(R.string.frase_definicion_concepto1)
             ),
             Pair(
-                getString(R.string.definicion_concepto2),
+                getString(R.string.definicion_concepto),
                 getString(R.string.frase_definicion_concepto2)
             ),
             Pair(
-                getString(R.string.definicion_concepto3),
+                getString(R.string.definicion_concepto),
                 getString(R.string.frase_definicion_concepto3)
             ),
             Pair(
-                getString(R.string.panel_amor_desamor1),
+                getString(R.string.panel_amor_desamor),
                 getString(R.string.frase_panel_amor_desamor1)
             ),
             Pair(
-                getString(R.string.panel_amor_desamor2),
+                getString(R.string.panel_amor_desamor),
                 getString(R.string.frase_panel_amor_desamor2)
             ),
             Pair(
-                getString(R.string.panel_amor_desamor3),
+                getString(R.string.panel_amor_desamor),
                 getString(R.string.frase_panel_amor_desamor3)
             )
         )
