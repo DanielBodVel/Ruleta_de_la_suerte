@@ -33,7 +33,7 @@
     <string name="multi_valorAcumulado">Cumulative value:</string>
     <string name="multi_saldo">Current balance:</string>
     <string name="multi_valorCasilla">Box value:</string>
-    <string name="multi_LetraEscogida">Enter letters only</string>
+    <string name="multi_LetraEscogida">Enter consonant only</string>
     <string name="multi_ButtonComprobarLetra">Check</string>
     <string name="multi_IntroduceFrase">Enter the correct sentence:</string>
     <string name="multi_EditFrase">Write the sentence here</string>

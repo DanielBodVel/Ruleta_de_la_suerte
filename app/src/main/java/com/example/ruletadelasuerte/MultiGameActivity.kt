@@ -309,19 +309,15 @@ class MultiGameActivity : AppCompatActivity() {
             } else {
                 letraEscogida.error = getString(R.string.error_letra_valida)
             }
-            val inputMethodManager =
-                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(letraEscogida.windowToken, 0)
             hideKeyboard()
         }
+
         btnOpcion1.setOnClickListener {
             contendorBotones.visibility = View.GONE
             contenedorResolver.visibility = View.VISIBLE
         }
-        btnOpcion2.setOnClickListener {
-            contendorBotones.visibility = View.GONE
-            contenedorComprarLetra.visibility = View.VISIBLE
 
+        btnOpcion2.setOnClickListener {
             val saldoJugadorActivo = when (jugadorActivo) {
                 0 -> saldoJugador1
                 1 -> saldoJugador2
@@ -329,8 +325,19 @@ class MultiGameActivity : AppCompatActivity() {
                 else -> 0
             }
 
-            valorSaldoComprar.text = "${saldoJugadorActivo}€"
+            if (saldoJugadorActivo <= 50) {
+                AlertDialog.Builder(this)
+                    .setTitle("Saldo insuficiente")
+                    .setMessage("No puedes comprar porque tu saldo tiene que ser más de 50.")
+                    .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+                    .show()
+            } else {
+                contendorBotones.visibility = View.GONE
+                contenedorComprarLetra.visibility = View.VISIBLE
+                valorSaldoComprar.text = "${saldoJugadorActivo}€"
+            }
         }
+
         btnOpcion3.setOnClickListener {
             contendorBotones.visibility = View.GONE
             contendorRuleta.visibility = View.VISIBLE
@@ -348,6 +355,7 @@ class MultiGameActivity : AppCompatActivity() {
             } else {
                 entradaLetraComprar.error = getString(R.string.error_letra_valida)
             }
+            entradaLetraComprar.setText("")
             hideKeyboard()
         }
 
@@ -359,7 +367,18 @@ class MultiGameActivity : AppCompatActivity() {
             } else {
                 entradaFrase.error = getString(R.string.error_frase_valida)
             }
+            hideKeyboard()
+        }
 
+        if (todasLasVocalesDescubiertas()) {
+            btnOpcion2.visibility = View.GONE
+        } else {
+            btnOpcion2.visibility = View.VISIBLE
+        }
+
+        if (todasLasLetrasDescubiertas()) {
+            contendorBotones.visibility = View.GONE
+            contenedorResolver.visibility = View.VISIBLE
         }
     }
 
@@ -482,6 +501,13 @@ class MultiGameActivity : AppCompatActivity() {
 
             contenedorAdivinarLetra.visibility = View.GONE
             contendorBotones.visibility = View.VISIBLE
+            if (todasLasVocalesDescubiertas()) {
+                btnOpcion2.visibility = View.GONE
+            }
+            if (todasLasLetrasDescubiertas()) {
+                contendorBotones.visibility = View.GONE
+                contenedorResolver.visibility = View.VISIBLE
+            }
         } else {
             Toast.makeText(
                 this,
@@ -615,6 +641,8 @@ class MultiGameActivity : AppCompatActivity() {
             contenedorResolver.visibility = View.VISIBLE
         }
         builder.setNegativeButton(getString(R.string.volver_a_tirar)) { dialog, which ->
+            saldoAcumulado = 0
+            textoValorAcumulado.text = getString(R.string.valor_acumulado, saldoAcumulado)
             girarRuleta()
         }
         builder.show()
@@ -692,6 +720,14 @@ class MultiGameActivity : AppCompatActivity() {
 
             contenedorComprarLetra.visibility = View.GONE
             contendorBotones.visibility = View.VISIBLE
+
+            if (todasLasVocalesDescubiertas()) {
+                btnOpcion2.visibility = View.GONE
+            }
+            if (todasLasLetrasDescubiertas()) {
+                contendorBotones.visibility = View.GONE
+                contenedorResolver.visibility = View.VISIBLE
+            }
         } else {
             Toast.makeText(this, getString(R.string.saldo_insuficiente), Toast.LENGTH_SHORT).show()
         }
@@ -704,6 +740,7 @@ class MultiGameActivity : AppCompatActivity() {
             if (frasesResueltas < 2) {
                 Toast.makeText(this, getString(R.string.frase_correcta), Toast.LENGTH_SHORT).show()
                 generarNuevaFrase()
+                siguienteJugador()
                 llenarPanelLetras(panelLetras, frase)
                 contenedorResolver.visibility = View.GONE
                 contendorRuleta.visibility = View.VISIBLE
@@ -739,6 +776,11 @@ class MultiGameActivity : AppCompatActivity() {
             contendorRuleta.visibility = View.VISIBLE
         }
         entradaFrase.text.clear()
+
+        if (todasLasLetrasDescubiertas()) {
+            contendorBotones.visibility = View.GONE
+            contenedorResolver.visibility = View.VISIBLE
+        }
     }
 
     private fun mostrarPanelFinal() {
@@ -776,7 +818,7 @@ class MultiGameActivity : AppCompatActivity() {
             newIntent.putExtra("jugador3Imagen", jugador3Imagen)
 
             startActivity(newIntent)
-        }, 2000)
+        }, 5000)
     }
 
 
@@ -800,5 +842,28 @@ class MultiGameActivity : AppCompatActivity() {
     private fun esVocal(letra: String): Boolean {
         val vocales = "AEIOU"
         return letra.uppercase() in vocales
+    }
+
+    private fun todasLasVocalesDescubiertas(): Boolean {
+        val vocales = "AEIOU"
+        for (i in frase.indices) {
+            if (frase[i].toString() in vocales) {
+                val vista = panelLetras.getChildAt(i) as? TextView
+                if (vista?.text == "_") {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    private fun todasLasLetrasDescubiertas(): Boolean {
+        for (i in 0 until panelLetras.childCount) {
+            val vista = panelLetras.getChildAt(i) as? TextView
+            if (vista?.text == "_") {
+                return false
+            }
+        }
+        return true
     }
 }
