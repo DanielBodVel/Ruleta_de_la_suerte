@@ -100,49 +100,63 @@ class PlayerSelectActivity : AppCompatActivity() {
                 else -> "#FFFFFF"
             }
 
-            if (playerColorGroup.checkedRadioButtonId != -1 && playerInputName.isNotEmpty() && playerGenderGroup.checkedRadioButtonId != -1) {
-                when (contadorJugadores) {
-                    1 -> {
-                        jugador1Nombre = playerInputName
-                        jugador1Color = playerColor
-                        jugador1Imagen = R.drawable.hombre1
-                        contadorJugadores++
-                        Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
-                        playerName.text?.clear()
-                    }
+            if (playerGenderGroup.checkedRadioButtonId == -1) {
+                Toast.makeText(this, "Faltan campos por completar", Toast.LENGTH_SHORT).show()
+            } else {
+                if (playerInputName.isEmpty()) {
+                    Toast.makeText(this, "Introduce un nombre", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (playerColorGroup.checkedRadioButtonId == -1) {
+                        Toast.makeText(this, "Selecciona un Color", Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (playerImage.drawable == null) {
+                            Toast.makeText(this, "Selecciona una imágen", Toast.LENGTH_SHORT).show()
+                        } else {
+                            when (contadorJugadores) {
+                                1 -> {
+                                    jugador1Nombre = playerInputName
+                                    jugador1Color = playerColor
+                                    jugador1Imagen = R.drawable.hombre1
+                                    contadorJugadores++
+                                    Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT)
+                                        .show()
+                                    playerName.text?.clear()
+                                }
 
-                    2 -> {
-                        jugador2Nombre = playerInputName
-                        jugador2Color = playerColor
-                        jugador2Imagen = imagenSeleccionada
-                        contadorJugadores++
-                        Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
-                        playerName.text?.clear()
-                    }
+                                2 -> {
+                                    jugador2Nombre = playerInputName
+                                    jugador2Color = playerColor
+                                    jugador2Imagen = imagenSeleccionada
+                                    contadorJugadores++
+                                    Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT)
+                                        .show()
+                                    playerName.text?.clear()
+                                }
 
-                    3 -> {
-                        jugador3Nombre = playerInputName
-                        jugador3Color = playerColor
-                        jugador3Imagen = imagenSeleccionada
+                                3 -> {
+                                    jugador3Nombre = playerInputName
+                                    jugador3Color = playerColor
+                                    jugador3Imagen = imagenSeleccionada
 
-                        val intent = Intent(this, TalkActivity::class.java)
-                        intent.putExtra("jugador1Nombre", jugador1Nombre)
-                        intent.putExtra("jugador1Color", jugador1Color)
-                        intent.putExtra("jugador1Imagen", jugador1Imagen)
+                                    val intent = Intent(this, TalkActivity::class.java)
+                                    intent.putExtra("jugador1Nombre", jugador1Nombre)
+                                    intent.putExtra("jugador1Color", jugador1Color)
+                                    intent.putExtra("jugador1Imagen", jugador1Imagen)
 
-                        intent.putExtra("jugador2Nombre", jugador2Nombre)
-                        intent.putExtra("jugador2Color", jugador2Color)
-                        intent.putExtra("jugador2Imagen", jugador2Imagen)
+                                    intent.putExtra("jugador2Nombre", jugador2Nombre)
+                                    intent.putExtra("jugador2Color", jugador2Color)
+                                    intent.putExtra("jugador2Imagen", jugador2Imagen)
 
-                        intent.putExtra("jugador3Nombre", jugador3Nombre)
-                        intent.putExtra("jugador3Color", jugador3Color)
-                        intent.putExtra("jugador3Imagen", jugador3Imagen)
+                                    intent.putExtra("jugador3Nombre", jugador3Nombre)
+                                    intent.putExtra("jugador3Color", jugador3Color)
+                                    intent.putExtra("jugador3Imagen", jugador3Imagen)
 
-                        startActivity(intent)
+                                    startActivity(intent)
+                                }
+                            }
+                        }
                     }
                 }
-            } else {
-                Toast.makeText(this, "Faltan campos por completar", Toast.LENGTH_SHORT).show()
             }
         }
     }
