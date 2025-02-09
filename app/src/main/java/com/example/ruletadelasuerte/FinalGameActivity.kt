@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -27,6 +28,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -58,6 +60,20 @@ class FinalGameActivity : AppCompatActivity() {
     private var contadorActivo = true
     private lateinit var frase: String
     private lateinit var pista: String
+
+
+    private lateinit var jugador1Nombre: String
+    private var saldo1Jugador: Int = 0
+    private lateinit var jugador1Color: String
+    private var jugador1Imagen: Int = 0
+    private lateinit var jugador2Nombre: String
+    private var saldo2Jugador: Int = 0
+    private lateinit var jugador2Color: String
+    private var jugador2Imagen: Int = 0
+    private lateinit var jugador3Nombre: String
+    private var saldo3Jugador: Int = 0
+    private lateinit var jugador3Color: String
+    private var jugador3Imagen: Int = 0
 
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -114,6 +130,8 @@ class FinalGameActivity : AppCompatActivity() {
         contador = findViewById(R.id.contador)
         entradaFrase = findViewById(R.id.entradaFrase)
         botonComprobar = findViewById(R.id.botonComprobar)
+
+        inicializarJugadores()
 
         // Configura el listener para girar la ruleta al tocar la pantalla
         ruleta.setOnTouchListener { _, event ->
@@ -203,12 +221,67 @@ class FinalGameActivity : AppCompatActivity() {
                 ).show()
                 countDownTimer.cancel()
                 contadorActivo = false
+
+                val (jugadorConMasSaldo, saldoMaximo) = listOf(
+                    Triple(jugador1Nombre, saldo1Jugador, ::saldo1Jugador),
+                    Triple(jugador2Nombre, saldo2Jugador, ::saldo2Jugador),
+                    Triple(jugador3Nombre, saldo3Jugador, ::saldo3Jugador)
+                ).maxByOrNull { it.second } ?: return@setOnClickListener
+                val premio = listOf(200, 500, 1000, 2000).random()
+
+                // Asignar el premio al jugador con más saldo
+                when (jugadorConMasSaldo) {
+                    jugador1Nombre -> saldo1Jugador += premio
+                    jugador2Nombre -> saldo2Jugador += premio
+                    jugador3Nombre -> saldo3Jugador += premio
+                }
+                Toast.makeText(
+                    this,
+                    "${jugadorConMasSaldo} ha recibido un premio de $premio!",
+                    Toast.LENGTH_LONG
+                ).show()
             } else {
-                Toast.makeText(this, getString(R.string.end_frase_incorrecta), Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(this, getString(R.string.end_frase_incorrecta), Toast.LENGTH_SHORT).show()
             }
             hideKeyboard()
+
+            val newIntent = Intent(this, EndActivity::class.java)
+            newIntent.putExtra("jugador1Nombre", jugador1Nombre)
+            newIntent.putExtra("saldo1Jugador", saldo1Jugador)
+            newIntent.putExtra("jugador1Color", jugador1Color)
+            newIntent.putExtra("jugador1Imagen", jugador1Imagen)
+
+            newIntent.putExtra("jugador2Nombre", jugador2Nombre)
+            newIntent.putExtra("saldo2Jugador", saldo2Jugador)
+            newIntent.putExtra("jugador2Color", jugador2Color)
+            newIntent.putExtra("jugador2Imagen", jugador2Imagen)
+
+            newIntent.putExtra("jugador3Nombre", jugador3Nombre)
+            newIntent.putExtra("saldo3Jugador", saldo3Jugador)
+            newIntent.putExtra("jugador3Color", jugador3Color)
+            newIntent.putExtra("jugador3Imagen", jugador3Imagen)
+
+            startActivity(newIntent)
         }
+    }
+
+
+    private fun inicializarJugadores() {
+        jugador1Nombre = intent.getStringExtra("jugador1Nombre") ?: "Jugador 1"
+        saldo1Jugador = intent.getIntExtra("saldo1Jugador", 0)
+        jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
+        jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
+
+        jugador2Nombre = intent.getStringExtra("jugador2Nombre") ?: "Jugador 2"
+        saldo2Jugador = intent.getIntExtra("saldo2Jugador", 0)
+        jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
+        jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
+
+        jugador3Nombre = intent.getStringExtra("jugador3Nombre") ?: "Jugador 3"
+        saldo3Jugador = intent.getIntExtra("saldo3Jugador", 0)
+        jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
+        jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
+
     }
 
     // Verifica si una letra es una consonante
@@ -333,7 +406,7 @@ class FinalGameActivity : AppCompatActivity() {
             linea.forEach { caracter ->
                 val vistaLetra = TextView(this).apply {
                     text = if (caracter == ' ') " " else "_"
-                    tag = caracter.toString().uppercase() // Guardar la letra real en el tag
+                    tag = caracter.toString().uppercase()
                     textSize = 24f
                     gravity = Gravity.CENTER
                     setBackgroundColor(
@@ -386,10 +459,6 @@ class FinalGameActivity : AppCompatActivity() {
                     letraEncontrada = true
                 }
             }
-        }
-
-        if (letraEncontrada) {
-            Toast.makeText(this, "Letra $letraNormalizada encontrada", Toast.LENGTH_SHORT).show()
         }
     }
 

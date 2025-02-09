@@ -95,6 +95,13 @@ class MultiGameActivity : AppCompatActivity() {
     private lateinit var nombreJugador3: TextView
     private lateinit var linearJugador3: LinearLayout
 
+    private lateinit var jugador1Color: String
+    private var jugador1Imagen: Int = 0
+    private lateinit var jugador2Color: String
+    private var jugador2Imagen: Int = 0
+    private lateinit var jugador3Color: String
+    private var jugador3Imagen: Int = 0
+
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -256,16 +263,16 @@ class MultiGameActivity : AppCompatActivity() {
 
     private fun inicializarJugadores() {
         val jugador1Nombre = intent.getStringExtra("jugador1Nombre") ?: "Jugador 1"
-        val jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
-        val jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
+         jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
+         jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
 
         val jugador2Nombre = intent.getStringExtra("jugador2Nombre") ?: "Jugador 2"
-        val jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
-        val jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
+         jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
+         jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
 
         val jugador3Nombre = intent.getStringExtra("jugador3Nombre") ?: "Jugador 3"
-        val jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
-        val jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
+         jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
+         jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
 
         nombreJugador1.text = jugador1Nombre
         nombreJugador1.setBackgroundColor(Color.parseColor(jugador1Color))
@@ -620,6 +627,9 @@ class MultiGameActivity : AppCompatActivity() {
 
     private fun actualizarJugadorActivo() {
 
+        linearJugador1.setBackgroundResource(0)
+        linearJugador2.setBackgroundResource(0)
+        linearJugador3.setBackgroundResource(0)
         when (jugadorActivo) {
             0 -> linearJugador1.setBackgroundResource(R.drawable.borde)
             1 -> linearJugador2.setBackgroundResource(R.drawable.borde)
@@ -734,9 +744,9 @@ class MultiGameActivity : AppCompatActivity() {
     private fun mostrarPanelFinal() {
         val mensaje = """
         ${getString(R.string.juego_terminado)}
-        ${getString(R.string.jugador_1, saldoJugador1)}
-        ${getString(R.string.jugador_2, saldoJugador2)}
-        ${getString(R.string.jugador_3, saldoJugador3)}
+        ${nombreJugador1.text}: $saldoJugador1
+        ${nombreJugador2.text}: $saldoJugador2
+        ${nombreJugador3.text}: $saldoJugador3
     """.trimIndent()
 
         AlertDialog.Builder(this)
@@ -748,12 +758,27 @@ class MultiGameActivity : AppCompatActivity() {
             .setCancelable(false)
             .show()
 
-
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, FinalGameActivity::class.java)
-            startActivity(intent)
+            val newIntent = Intent(this, FinalGameActivity::class.java)
+            newIntent.putExtra("jugador1Nombre", nombreJugador1.text)
+            newIntent.putExtra("saldo1Jugador", saldoJugador1)
+            newIntent.putExtra("jugador1Color", jugador1Color)
+            newIntent.putExtra("jugador1Imagen", jugador1Imagen)
+
+            newIntent.putExtra("jugador2Nombre", nombreJugador2.text)
+            newIntent.putExtra("saldo2Jugador", saldoJugador2)
+            newIntent.putExtra("jugador2Color", jugador2Color)
+            newIntent.putExtra("jugador2Imagen", jugador2Imagen)
+
+            newIntent.putExtra("jugador3Nombre", nombreJugador3.text)
+            newIntent.putExtra("saldo3Jugador", saldoJugador3)
+            newIntent.putExtra("jugador3Color", jugador3Color)
+            newIntent.putExtra("jugador3Imagen", jugador3Imagen)
+
+            startActivity(newIntent)
         }, 2000)
     }
+
 
     private fun actualizarSaldosEnPantalla() {
         jugador1.text = "${saldoJugador1}€"
