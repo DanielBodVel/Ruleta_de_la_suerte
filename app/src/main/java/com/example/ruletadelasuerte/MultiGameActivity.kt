@@ -1,5 +1,7 @@
 package com.example.ruletadelasuerte
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -14,6 +16,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -31,6 +34,7 @@ import androidx.core.view.WindowInsetsCompat
 import kotlin.math.atan2
 import kotlin.random.Random
 
+@SuppressLint("SetTextI18n")
 class MultiGameActivity : AppCompatActivity() {
     private lateinit var textoPista: TextView
     private lateinit var panelLetras: GridLayout
@@ -40,6 +44,7 @@ class MultiGameActivity : AppCompatActivity() {
 
     private lateinit var ruleta: ImageView
     private lateinit var contendorRuleta: LinearLayout
+    private lateinit var puntero: ImageView
     private lateinit var contenedorAdivinarLetra: LinearLayout
     private lateinit var contendorBotones: LinearLayout
     private lateinit var contenedorResolver: LinearLayout
@@ -77,19 +82,18 @@ class MultiGameActivity : AppCompatActivity() {
     //Datos de los jugadores
     private var saldoJugador1 = 0
     private lateinit var avatarJugador1: ImageView
-    private lateinit var nombreJugador1:TextView
+    private lateinit var nombreJugador1: TextView
     private lateinit var linearJugador1: LinearLayout
 
     private var saldoJugador2 = 0
     private lateinit var avatarJugador2: ImageView
-    private lateinit var nombreJugador2:TextView
+    private lateinit var nombreJugador2: TextView
     private lateinit var linearJugador2: LinearLayout
 
     private var saldoJugador3 = 0
     private lateinit var avatarJugador3: ImageView
-    private lateinit var nombreJugador3:TextView
+    private lateinit var nombreJugador3: TextView
     private lateinit var linearJugador3: LinearLayout
-
 
     @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("ClickableViewAccessibility")
@@ -109,6 +113,16 @@ class MultiGameActivity : AppCompatActivity() {
             it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
 
+        puntero = findViewById(R.id.puntero)
+
+        val animator = ObjectAnimator.ofFloat(puntero, "translationY", -10f, 5f).apply {
+            duration = 1000 // Duración de 1 segundo
+            interpolator = LinearInterpolator()
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+        }
+
+        animator.start()
 
         frasesYPistas = arrayOf(
             Pair(getString(R.string.titular_loco1), getString(R.string.frase_titular_loco1)),
@@ -117,15 +131,42 @@ class MultiGameActivity : AppCompatActivity() {
             Pair(getString(R.string.letra_cancion1), getString(R.string.frase_letra_cancion1)),
             Pair(getString(R.string.letra_cancion2), getString(R.string.frase_letra_cancion2)),
             Pair(getString(R.string.letra_cancion3), getString(R.string.frase_letra_cancion3)),
-            Pair(getString(R.string.descubrimiento_cientifico1), getString(R.string.frase_descubrimiento_cientifico1)),
-            Pair(getString(R.string.descubrimiento_cientifico2), getString(R.string.frase_descubrimiento_cientifico2)),
-            Pair(getString(R.string.descubrimiento_cientifico3), getString(R.string.frase_descubrimiento_cientifico3)),
-            Pair(getString(R.string.definicion_concepto1), getString(R.string.frase_definicion_concepto1)),
-            Pair(getString(R.string.definicion_concepto2), getString(R.string.frase_definicion_concepto2)),
-            Pair(getString(R.string.definicion_concepto3), getString(R.string.frase_definicion_concepto3)),
-            Pair(getString(R.string.panel_amor_desamor1), getString(R.string.frase_panel_amor_desamor1)),
-            Pair(getString(R.string.panel_amor_desamor2), getString(R.string.frase_panel_amor_desamor2)),
-            Pair(getString(R.string.panel_amor_desamor3), getString(R.string.frase_panel_amor_desamor3))
+            Pair(
+                getString(R.string.descubrimiento_cientifico1),
+                getString(R.string.frase_descubrimiento_cientifico1)
+            ),
+            Pair(
+                getString(R.string.descubrimiento_cientifico2),
+                getString(R.string.frase_descubrimiento_cientifico2)
+            ),
+            Pair(
+                getString(R.string.descubrimiento_cientifico3),
+                getString(R.string.frase_descubrimiento_cientifico3)
+            ),
+            Pair(
+                getString(R.string.definicion_concepto1),
+                getString(R.string.frase_definicion_concepto1)
+            ),
+            Pair(
+                getString(R.string.definicion_concepto2),
+                getString(R.string.frase_definicion_concepto2)
+            ),
+            Pair(
+                getString(R.string.definicion_concepto3),
+                getString(R.string.frase_definicion_concepto3)
+            ),
+            Pair(
+                getString(R.string.panel_amor_desamor1),
+                getString(R.string.frase_panel_amor_desamor1)
+            ),
+            Pair(
+                getString(R.string.panel_amor_desamor2),
+                getString(R.string.frase_panel_amor_desamor2)
+            ),
+            Pair(
+                getString(R.string.panel_amor_desamor3),
+                getString(R.string.frase_panel_amor_desamor3)
+            )
         )
 
 
@@ -485,7 +526,7 @@ class MultiGameActivity : AppCompatActivity() {
 
         rotacionFinal = nuevaRotacion % 360
         ruleta.animate()
-            .rotation(nuevaRotacion.toFloat())
+            .rotation(nuevaRotacion)
             .setDuration(3000)
             .setInterpolator(AccelerateDecelerateInterpolator())
             .withEndAction {

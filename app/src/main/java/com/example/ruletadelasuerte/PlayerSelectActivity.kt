@@ -104,7 +104,7 @@ class PlayerSelectActivity : AppCompatActivity() {
                 when (contadorJugadores) {
                     1 -> {
                         jugador1Nombre = playerInputName
-                        jugador1Color = playerColor.toString()
+                        jugador1Color = playerColor
                         jugador1Imagen = R.drawable.hombre1
                         contadorJugadores++
                         Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
@@ -113,7 +113,7 @@ class PlayerSelectActivity : AppCompatActivity() {
 
                     2 -> {
                         jugador2Nombre = playerInputName
-                        jugador2Color = playerColor.toString()
+                        jugador2Color = playerColor
                         jugador2Imagen = imagenSeleccionada
                         contadorJugadores++
                         Toast.makeText(this, "Siguiente jugador", Toast.LENGTH_SHORT).show()
@@ -122,7 +122,7 @@ class PlayerSelectActivity : AppCompatActivity() {
 
                     3 -> {
                         jugador3Nombre = playerInputName
-                        jugador3Color = playerColor.toString()
+                        jugador3Color = playerColor
                         jugador3Imagen = imagenSeleccionada
 
                         val intent = Intent(this, TalkActivity::class.java)

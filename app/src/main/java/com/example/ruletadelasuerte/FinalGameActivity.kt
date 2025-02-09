@@ -1,8 +1,11 @@
 package com.example.ruletadelasuerte
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -10,7 +13,10 @@ import android.os.Looper
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
@@ -20,6 +26,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -31,6 +38,7 @@ class FinalGameActivity : AppCompatActivity() {
     private lateinit var textoPista: TextView
     private lateinit var panelLetras: GridLayout
     private lateinit var contenedorRuleta: LinearLayout
+    private lateinit var puntero: ImageView
     private lateinit var textoInstruccion: TextView
     private lateinit var contenedorEntradas: LinearLayout
     private lateinit var botonMostrar: Button
@@ -52,6 +60,7 @@ class FinalGameActivity : AppCompatActivity() {
     private lateinit var pista: String
 
 
+    @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("ClickableViewAccessibility", "MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +71,21 @@ class FinalGameActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        window.insetsController?.let {
+            it.hide(WindowInsets.Type.statusBars())
+            it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+
+        puntero = findViewById(R.id.puntero)
+        val animator = ObjectAnimator.ofFloat(puntero, "translationY", -10f, 5f).apply {
+            duration = 1000 // Duración de 1 segundo
+            interpolator = LinearInterpolator()
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+        }
+        animator.start()
+
         pistasYFrases = arrayOf(
             Pair(getString(R.string.end_panelFinal1), getString(R.string.end_FraseFinal1)),
             Pair(getString(R.string.end_panelFinal2), getString(R.string.end_FraseFinal2)),
@@ -240,7 +264,7 @@ class FinalGameActivity : AppCompatActivity() {
         rotacionFinal = nuevaRotacion % 360
 
         ruleta.animate()
-            .rotation(nuevaRotacion.toFloat())
+            .rotation(nuevaRotacion)
             .setDuration(3000)
             .setInterpolator(AccelerateDecelerateInterpolator())
             .withEndAction {
@@ -313,7 +337,9 @@ class FinalGameActivity : AppCompatActivity() {
                     textSize = 24f
                     gravity = Gravity.CENTER
                     setBackgroundColor(
-                        if (caracter == ' ') getColor(android.R.color.darker_gray) else getColor(android.R.color.white)
+                        if (caracter == ' ') getColor(android.R.color.darker_gray) else getColor(
+                            android.R.color.white
+                        )
                     )
                     layoutParams = GridLayout.LayoutParams().apply {
                         width = 0
@@ -327,8 +353,6 @@ class FinalGameActivity : AppCompatActivity() {
             repeat(espaciosDerecha) { agregarCuadradoGris(panel) }
         }
     }
-
-
 
 
     // Añade un cuadrado gris al panel de letras
@@ -368,8 +392,6 @@ class FinalGameActivity : AppCompatActivity() {
             Toast.makeText(this, "Letra $letraNormalizada encontrada", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
 
     // Muestra el apartado para adivinar la frase completa

@@ -64,13 +64,14 @@
             android:id="@+id/puntero"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="-20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="-10dp"
             app:layout_constraintBottom_toTopOf="@id/contenedorPaneles"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/panelLetras"
-            app:srcCompat="@drawable/flecha" />
+            app:srcCompat="@drawable/flecha"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -81,7 +82,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/panelLetras"
-            app:srcCompat="@drawable/ruleta" />
+            app:srcCompat="@drawable/ruleta"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
@@ -117,7 +119,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/hombre1"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/saldoJugador1"
@@ -163,7 +166,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/hombre1"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/saldoJugador2"
@@ -209,7 +213,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/hombre1"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/saldoJugador3"
@@ -244,6 +249,7 @@
         android:gravity="center"
         android:text="Valor acumulado: 0€"
         android:textSize="18sp"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/contenedorPaneles"
@@ -278,6 +284,7 @@
                 android:id="@+id/textoSaldo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_marginEnd="8dp"
                 android:text="@string/multi_saldo"
                 android:textSize="16sp"
@@ -287,6 +294,7 @@
                 android:id="@+id/valorSaldoJugador"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="0"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -297,6 +305,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="8dp"
+                android:textColor="@color/white"
                 android:text="@string/multi_valorCasilla"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -305,6 +314,7 @@
                 android:id="@+id/valorCeldaTirada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="0"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -357,7 +367,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/multi_IntroduceFrase"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -365,6 +375,7 @@
             android:id="@+id/entradaFrase"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginBottom="16dp"
             android:hint="@string/multi_EditFrase"
             android:importantForAutofill="no"
@@ -399,7 +410,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/multi_IntroBuy"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -415,6 +426,7 @@
                 android:id="@+id/textoSaldoComprar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:layout_marginEnd="8dp"
                 android:text="@string/multi_saldo"
                 android:textSize="16sp"
@@ -424,6 +436,7 @@
                 android:id="@+id/valorSaldoComprar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="0"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -434,6 +447,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:textColor="@color/white"
             android:hint="@string/multi_EditLetra"
             android:importantForAutofill="no"
             android:inputType="text"
@@ -468,7 +482,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/multi_opciones"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
 
