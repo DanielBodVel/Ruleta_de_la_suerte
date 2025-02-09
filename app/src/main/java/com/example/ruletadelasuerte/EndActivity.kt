@@ -18,33 +18,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.ruletadelasuerte.utils.GameSaver
 
 class EndActivity : AppCompatActivity() {
-//    private lateinit var name1: String
-//    private lateinit var name2: String
-//    private lateinit var name3: String
-//
-//    private lateinit var image1: String
-//    private lateinit var image2: String
-//    private lateinit var image3: String
-//
-//    private var balance1: Int = 0
-//    private var balance2: Int = 0
-//    private var balance3: Int = 0
-
     private lateinit var playerImage: ImageView
     private lateinit var playerName: TextView
     private lateinit var playerSale1: TextView
     private lateinit var playerSale2: TextView
     private lateinit var playerSale3: TextView
-
-
-
-    //DATOS FAKE PARA BASE DE DATOS
-//    private var nombreJugador1: String = "Daniel"
-//    private var nombreJugador2: String = "Abel"
-//    private var nombreJugador3: String = "David"
-//    private var ganancia1: Int = 5000
-//    private var ganancia2: Int = 200
-//    private var ganancia3: Int = 800
 
     private val gameSaver = GameSaver(this)
 
@@ -64,8 +42,6 @@ class EndActivity : AppCompatActivity() {
 //    private lateinit var salePlayer1: TextView
 //    private lateinit var salePlayer2: TextView
 //    private lateinit var salePlayer3: TextView
-
-
 
 
     @SuppressLint("SetTextI18n")
@@ -93,25 +69,15 @@ class EndActivity : AppCompatActivity() {
         inicializarJugadores()
         mostrarDatosJugadores()
 
-//        val bundle = intent.extras
-//        if (bundle != null) {
-//            name1 = bundle.getString("name1").toString()
-//            image1 = bundle.getString("image1").toString()
-//            balance1 = bundle.getInt("balance1")
-//
-//            name2 = bundle.getString("name2").toString()
-//            image2 = bundle.getString("image2").toString()
-//            balance2 = bundle.getInt("balance2")
-//
-//            name3 = bundle.getString("name3").toString()
-//            image3 = bundle.getString("image3").toString()
-//            balance3 = bundle.getInt("balance3")
-//        }
-
-
-
         findViewById<ImageButton>(R.id.imageButtonBack)?.setOnClickListener {
-            val id = gameSaver.insertGame(nombreJugador1, ganancia1, nombreJugador2, ganancia2, nombreJugador3, ganancia3)
+            val id = gameSaver.insertGame(
+                nombreJugador1,
+                ganancia1,
+                nombreJugador2,
+                ganancia2,
+                nombreJugador3,
+                ganancia3
+            )
             if (id != -1L) {
                 Toast.makeText(this, "Partida guardada correctamente", Toast.LENGTH_SHORT).show()
             }
@@ -145,10 +111,12 @@ class EndActivity : AppCompatActivity() {
                 playerImage.setImageResource(jugador1Imagen)
                 playerName.text = "¡Ha ganado $nombreJugador1!"
             }
+
             ganancia2 -> {
                 playerImage.setImageResource(jugador2Imagen)
                 playerName.text = "¡Ha ganado $nombreJugador2!"
             }
+
             ganancia3 -> {
                 playerImage.setImageResource(jugador3Imagen)
                 playerName.text = "¡Ha ganado $nombreJugador3!"

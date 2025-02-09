@@ -263,16 +263,16 @@ class MultiGameActivity : AppCompatActivity() {
 
     private fun inicializarJugadores() {
         val jugador1Nombre = intent.getStringExtra("jugador1Nombre") ?: "Jugador 1"
-         jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
-         jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
+        jugador1Color = intent.getStringExtra("jugador1Color") ?: "#FFFFFF"
+        jugador1Imagen = intent.getIntExtra("jugador1Imagen", R.drawable.mujer1)
 
         val jugador2Nombre = intent.getStringExtra("jugador2Nombre") ?: "Jugador 2"
-         jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
-         jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
+        jugador2Color = intent.getStringExtra("jugador2Color") ?: "#FFFFFF"
+        jugador2Imagen = intent.getIntExtra("jugador2Imagen", R.drawable.hombre1)
 
         val jugador3Nombre = intent.getStringExtra("jugador3Nombre") ?: "Jugador 3"
-         jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
-         jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
+        jugador3Color = intent.getStringExtra("jugador3Color") ?: "#FFFFFF"
+        jugador3Imagen = intent.getIntExtra("jugador3Imagen", R.drawable.mujer2)
 
         nombreJugador1.text = jugador1Nombre
         nombreJugador1.setBackgroundColor(Color.parseColor(jugador1Color))

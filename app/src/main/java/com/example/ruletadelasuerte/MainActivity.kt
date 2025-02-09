@@ -154,17 +154,18 @@ class MainActivity : BaseActivity() {
         var volume = 1.0f // Volumen inicial al 100%
         val step = volume / fadeSteps // Paso de reducción del volumen
 
-        // Runnable que se ejecuta repetidamente para disminuir el volumen
         handler.post(object : Runnable {
             override fun run() {
-                if (volume > 0) {
+                if (volume > 0 && this@MainActivity::mediaPlayer.isInitialized && mediaPlayer.isPlaying) {
                     volume -= step
                     if (volume < 0) volume = 0f // Asegura que el volumen no sea negativo
                     mediaPlayer.setVolume(volume, volume) // Aplica el volumen reducido
                     handler.postDelayed(this, delay.toLong()) // Repite el proceso
                 } else {
-                    mediaPlayer.stop() // Detiene la música cuando el volumen llega a 0
-                    mediaPlayer.release() // Libera los recursos del MediaPlayer
+                    if (this@MainActivity::mediaPlayer.isInitialized) {
+                        mediaPlayer.stop() // Detiene la música cuando el volumen llega a 0
+                        mediaPlayer.release() // Libera los recursos del MediaPlayer
+                    }
                 }
             }
         })

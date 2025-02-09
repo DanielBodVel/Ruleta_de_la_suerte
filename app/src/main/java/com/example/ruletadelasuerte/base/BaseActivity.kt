@@ -3,6 +3,7 @@ package com.example.ruletadelasuerte.base
 import android.content.Context
 import android.content.IntentFilter
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ruletadelasuerte.utils.LanguageChangeReceiver
@@ -24,13 +25,15 @@ abstract class BaseActivity : AppCompatActivity() {
      * @param newBase Contexto de la aplicación o actividad.
      */
     override fun attachBaseContext(newBase: Context?) {
-        // Crea un gestor de configuración regional con el contexto base
-        val localeManager = LocaleManager(newBase!!)
+        if (newBase == null) {
+            Log.e("BaseActivity", "El contexto base es null, usando contexto predeterminado")
+            super.attachBaseContext(this) // Usa el contexto actual si `newBase` es null
+            return
+        }
 
-        // Actualiza el contexto con el idioma configurado
+        val localeManager = LocaleManager(newBase)
         val context = updateLocale(newBase, localeManager.getLocale())
 
-        // Aplica el contexto actualizado a la actividad
         super.attachBaseContext(context)
     }
 
@@ -43,8 +46,19 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onResume()
         val intentFilter = IntentFilter("com.example.ruletadelasuerte.LANGUAGE_CHANGED")
 
-        // Registra el receiver para escuchar eventos de cambio de idioma
-        registerReceiver(languageChangeReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                registerReceiver(
+                    languageChangeReceiver,
+                    intentFilter,
+                    Context.RECEIVER_NOT_EXPORTED
+                )
+            } else {
+                registerReceiver(languageChangeReceiver, intentFilter)
+            }
+        } catch (e: Exception) {
+            Log.e("BaseActivity", "Error al registrar receiver: ${e.message}")
+        }
     }
 
     /**
@@ -53,6 +67,10 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     override fun onPause() {
         super.onPause()
-        unregisterReceiver(languageChangeReceiver)
+        try {
+            unregisterReceiver(languageChangeReceiver)
+        } catch (e: Exception) {
+            Log.e("BaseActivity", "Receiver no registrado: ${e.message}")
+        }
     }
 }
