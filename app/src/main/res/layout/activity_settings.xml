@@ -29,6 +29,7 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/red"
         android:text="@string/eng"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toEndOf="@+id/buttSpanish"
@@ -42,16 +43,18 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/red"
         android:text="@string/esp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idioma" />
 
     <Button
+        android:id="@+id/buttBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="96dp"
         android:backgroundTint="@color/red"
-        android:id="@+id/buttBack"
         android:text="@string/volver"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

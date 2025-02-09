@@ -44,7 +44,7 @@
     <string name="multi_ButtonComprar">Comprar</string>
     <string name="multi_ButtonTirar">Tirar</string>
     <string name="titular_loco1">Titular loco</string>
-    <string name="frase_titular_loco1">UN PEZ VOLADOR ROMPE RÉCORD DE ALTURA</string>
+    <string name="frase_titular_loco1">UN PEZ VOLADOR ROMPE RECORD DE ALTURA</string>
     <string name="titular_loco2">Titular loco</string>
     <string name="frase_titular_loco2">ENCUENTRAN UNA CIUDAD PERDIDA BAJO EL MAR</string>
     <string name="titular_loco3">Titular loco</string>
@@ -60,13 +60,13 @@
     <string name="descubrimiento_cientifico2">Descubrimiento cientifico</string>
     <string name="frase_descubrimiento_cientifico2">LOGRAN CULTIVAR PLANTAS EN SUELO LUNAR</string>
     <string name="descubrimiento_cientifico3">Descubrimiento cientifico</string>
-    <string name="frase_descubrimiento_cientifico3">HALLAN UN FÓSIL DE UN SER DESCONOCIDO</string>
+    <string name="frase_descubrimiento_cientifico3">HALLAN UN FOSIL DE UN SER DESCONOCIDO</string>
     <string name="definicion_concepto1">Definicion de un concepto</string>
     <string name="frase_definicion_concepto1">LA NOSTALGIA ES EL ECO DEL TIEMPO</string>
     <string name="definicion_concepto2">Definicion de un concepto</string>
     <string name="frase_definicion_concepto2">UN FRACTAL SE REPITE EN INFINITAS ESCALAS</string>
     <string name="definicion_concepto3">Definicion de un concepto</string>
-    <string name="frase_definicion_concepto3">EL AMOR DESAFÍA TODAS LAS LEYES FÍSICAS</string>
+    <string name="frase_definicion_concepto3">EL AMOR DESAFIA TODAS LAS LEYES FISICAS</string>
     <string name="panel_amor_desamor1">Panel del amor/desamor</string>
     <string name="frase_panel_amor_desamor1">TE AME COMO UN LOCO PERO DESPERTE A TIEMPO</string>
     <string name="panel_amor_desamor2">Panel del amor/desamor</string>
@@ -122,7 +122,7 @@
     <string name="end_panelFinal4">Libro y autor</string>
     <string name="end_FraseFinal4">1984 DE GEORGE ORWELL</string>
     <string name="end_panelFinal5">Libro y autor</string>
-    <string name="end_FraseFinal5">CIEN AÑOS DE SOLEDAD DE GABRIEL GARCÍA MÁRQUEZ</string>
+    <string name="end_FraseFinal5">CIEN AÑOS DE SOLEDAD DE GABRIEL GARCIA MARQUEZ</string>
     <string name="end_panelFinal6">Libro y autor</string>
     <string name="end_FraseFinal6">DON QUIJOTE DE LA MANCHA DE MIGUEL DE CERVANTES</string>
     <string name="end_panelFinal7">Pelicula y director</string>
